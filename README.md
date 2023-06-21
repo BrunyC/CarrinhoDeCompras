@@ -106,12 +106,6 @@ $ nest start [Microservice] --watch
 $ npm run lint:format
 ```
 
-## Run Eslint and Prettier to format and fix the code
-
-```bash
-$ npm run lint:format
-```
-
 ## Tests
 
 ## Run Coverage Tests
