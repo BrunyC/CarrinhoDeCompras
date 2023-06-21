@@ -1,0 +1,48 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "lib": [
+      "ES2020"
+    ],
+    "target": "ES2020",
+    "strict": false,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "declaration": true,
+    "removeComments": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "forceConsistentCasingInFileNames": true,
+    "resolveJsonModule": true,
+    "sourceMap": true,
+    "outDir": "./dist",
+    "baseUrl": "./",
+    "incremental": true,
+    "paths": {
+      "@api/*": [
+        "api/src/*"
+      ],
+      "@config/*": [
+        "config/services/*"
+      ],
+      "@lib/dto/microservices/notification/*": [
+        "lib/src/dto/microservices/notification/*"
+      ],
+      "@lib/enum/*": [
+        "lib/src/enum/*"
+      ],
+      "@lib/type/*": [
+        "lib/src/type/*"
+      ],
+      "@notification/*": [
+        "microservices/notification/src/*"
+      ],
+    }
+  },
+  "exclude": [
+    "node_modules",
+    "dist"
+  ]
+}

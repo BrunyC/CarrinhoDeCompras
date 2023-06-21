@@ -1,0 +1,30 @@
+{
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "apps/api/src",
+  "monorepo": true,
+  "root": "apps/api",
+  "compilerOptions": {
+    "webpack": true,
+    "tsConfigPath": "apps/api/tsconfig.app.json"
+  },
+  "projects": {
+		"api": {
+			"type": "application",
+			"root": "api",
+			"entryFile": "main",
+			"sourceRoot": "api/src",
+			"compilerOptions": {
+				"tsConfigPath": "api/tsconfig.app.json"
+			}
+		},
+		"notification": {
+			"type": "application",
+			"root": "microservices/notification",
+			"entryFile": "main",
+			"sourceRoot": "microservices/notification/src",
+			"compilerOptions": {
+				"tsConfigPath": "microservices/notification/tsconfig.app.json"
+			}
+		}
+	}
+}

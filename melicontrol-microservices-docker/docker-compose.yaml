@@ -1,0 +1,15 @@
+version: '3.7'
+
+services:
+
+  rabbitmq:
+    image: rabbitmq:3.8-management
+    container_name: melicontrol-rabbitmq-3.8.3
+    volumes:
+      - ./services/rabbitmq/data:/var/lib/rabbitmq/
+    environment:
+      - RABBITMQ_DEFAULT_USER=main
+      - RABBITMQ_DEFAULT_PASS=main
+    ports:
+      - '5672:5672'
+      - '15672:15672'
