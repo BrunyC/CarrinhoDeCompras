@@ -1,0 +1,28 @@
+version: "3"
+
+networks:
+  internal:
+    external: true
+  meli-network:
+    driver: bridge
+
+services:
+  melicontrol-notification:
+    container_name: meli
+    build: .
+    environment:
+      PORT: 8888
+      RMQ_HOST: melicontrol-rabbitmq-3.8.3
+      RMQ_USERNAME: main
+      RMQ_PASSWORD: main
+      RMQ_PORT: 5672
+      RMQ_VHOST: ''
+      LOG_SYNC: 1
+    volumes:
+      - .:/usr/src/app
+    ports:
+      - "8888:8888"
+    networks:
+      - meli-network
+      - internal
+ 

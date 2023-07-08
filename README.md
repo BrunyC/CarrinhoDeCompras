@@ -4,7 +4,7 @@ MeliControl MicroServices
 ## Installation
 
 ```bash
-$ npm install
+npm install
 ```
 
 ## Build Development Containers Services (Docker)
@@ -14,7 +14,7 @@ $ npm install
 This part builds all the containers of the services using **Docker Compose** configuration set on submodule updated earlier.
 
 ```bash
-$ npm run build:services
+npm run build:services
 ```
 
 ## Start Development Containers Services (Docker)
@@ -22,19 +22,19 @@ $ npm run build:services
 > :warning:**WARNING**: Need to execute the command above (build) before start the containers services.
 
 ```bash
-$ npm run start:services
+npm run start:services
 ```
 
 ## Start Single Development Container Service (Docker)
 
 ```bash
-$ npm run start:service:[Service]
+npm run start:service:[Service]
 ```
 
 ## Stop Single Development Container Service (Docker)
 
 ```bash
-$ npm run stop:service:[Service]
+npm run stop:service:[Service]
 ```
 
 ## Microservices
@@ -42,54 +42,54 @@ $ npm run stop:service:[Service]
 ## Build Microservices
 
 ```bash
-$ npm run build:microservices
+npm run build:microservices
 ```
 
 ### Build Single Microservice
 
 ```bash
-$ nest build [Microservice]
+nest build [Microservice]
 ```
 
 ## Start All Microservices with PM2
 
 ```bash
-$ pm2 start ecosystem.microservices.config.js
+pm2 start ecosystem.microservices.config.js
 ```
 
 ## Start Specific Microservice(s) with PM2
 
 ```bash
-$ pm2 start ecosystem.microservices.config.js --only=[Microservice]
+pm2 start ecosystem.microservices.config.js --only=[Microservice]
 ```
 ## Stop All Microservices Execution in PM2
 
 ```bash
-$ pm2 stop all
+pm2 stop all
 ```
 
 ## Stop Specific Microservice(s) Execution in PM2
 
 ```bash
-$ pm2 stop [Microservice] | [Process ID]
+pm2 stop [Microservice] | [Process ID]
 ```
 
 ## Watch All Microservices Logs in PM2
 
 ```bash
-$ pm2 logs
+pm2 logs
 ```
 
 ## Watch Specific Microservice Logs in PM2
 
 ```bash
-$ pm2 logs [Microservice]
+pm2 logs [Microservice]
 ```
 
 ## Start Development
 
 ```bash
-$ nest start [Microservice]
+nest start [Microservice]
 ```
 
 ## Start Development in Watch Mode
@@ -97,13 +97,13 @@ $ nest start [Microservice]
 > :warning:**WARNING**: Running the project in _watch_ mode is memory expensive, take care.
 
 ```bash
-$ nest start [Microservice] --watch
+nest start [Microservice] --watch
 ```
 
 ## Run Eslint and Prettier to format and fix the code
 
 ```bash
-$ npm run lint:format
+npm run lint:format
 ```
 
 ## Tests
@@ -111,7 +111,7 @@ $ npm run lint:format
 ## Run Coverage Tests
 
 ```bash
-$ npm run test:unit:cov
+npm run test:unit:cov
 ```
 
 ## Docs
@@ -119,3 +119,5 @@ $ npm run test:unit:cov
 ## Swagger API
 
 $ http://localhost:[PORT]/api/docs
+
+% TODO Arrumar os comandos do docker

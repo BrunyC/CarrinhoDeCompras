@@ -2,7 +2,7 @@ POST http://localhost:8888/Meli
 Content-Type: application/json
 
 {
-	"topic": "items",
+	"topic": "payments",
 	"resource": "/items/MLB1675189448",
 	"user_id": 260510465
 }

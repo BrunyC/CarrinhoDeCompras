@@ -1,0 +1,9 @@
+Dockerfile
+.dockerignore
+node_modules
+dist
+.env
+.env.example
+melicontrol-microservices-docker
+http
+README.md
