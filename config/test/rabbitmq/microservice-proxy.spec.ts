@@ -68,7 +68,7 @@ describe('Microservice Proxy', () => {
 			expect(clientProxy).toHaveProperty('send');
 			expect(clientProxy).toHaveProperty('emit');
 		});
-	
+
 		it(`should successfully get reference to ${Microservice.ITEMS} microservice proxy`, () => {
 			const clientProxy = microserviceProxy.getClientProxyByMicroservice(Microservice.ITEMS);
 

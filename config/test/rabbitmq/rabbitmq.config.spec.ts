@@ -11,7 +11,7 @@ describe('RabbitMQ Config', () => {
 		RMQ_VHOST: '',
 		RMQ_PORT: '1111',
 		RMQ_USERNAME: 'root',
-		RMQ_PASSWORD: 'root', 
+		RMQ_PASSWORD: 'root',
 		RMQ_QUEUE_ACK_CONFIG: 'false',
 		RMQ_QUEUE_DURABLE_CONFIG: 'false',
 		RMQ_PERSISTENT_CONFIG: 'true'
@@ -199,12 +199,12 @@ describe('RabbitMQ Config', () => {
 			RMQ_VHOST: '',
 			RMQ_PORT: '1111',
 			RMQ_USERNAME: 'root',
-			RMQ_PASSWORD: 'root', 
+			RMQ_PASSWORD: 'root',
 			RMQ_QUEUE_ACK_CONFIG: 'true',
 			RMQ_QUEUE_DURABLE_CONFIG: 'true',
 			RMQ_PERSISTENT_CONFIG: 'false'
 		};
-		
+
 		expect(rabbitMqConfig.setVariables()).toBeUndefined();
 
 		const options: any = {

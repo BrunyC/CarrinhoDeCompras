@@ -54,7 +54,7 @@ nest build [Microservice]
 ## Start All Microservices with PM2
 
 ```bash
-pm2 start ecosystem.microservices.config.js
+npm run start
 ```
 
 ## Start Specific Microservice(s) with PM2
@@ -114,10 +114,28 @@ npm run lint:format
 npm run test:unit:cov
 ```
 
+## Docker
+
+## To build docker image
+
+```bash
+npm run build:docker
+```
+
+## To build and start docker 
+
+```bash
+docker compose up
+```
+
+## To build and start docker in background
+
+```bash
+docker compose up -d
+```
+
 ## Docs
 
 ## Swagger API
 
 $ http://localhost:[PORT]/api/docs
-
-% TODO Arrumar os comandos do docker

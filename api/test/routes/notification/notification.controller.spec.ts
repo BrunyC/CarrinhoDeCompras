@@ -10,39 +10,40 @@ export const RabbitMQServiceMock = jest.fn(() => ({
 }));
 
 describe('NotificationController', () => {
-  let notificationController: NotificationController;
-  let notificationService: NotificationService;
+	let notificationController: NotificationController;
+	let notificationService: NotificationService;
 
-  beforeEach(async () => {
-    const module: TestingModule = await Test.createTestingModule({
-      controllers: [NotificationController],
-      providers: [
-        {
-        provide: MicroserviceProxy.MICROSERVICE_PROXY_SERVICE,
-        useClass: RabbitMQServiceMock
-        },
-        NotificationService],
-    }).compile();
+	beforeEach(async () => {
+		const module: TestingModule = await Test.createTestingModule({
+			controllers: [NotificationController],
+			providers: [
+				{
+					provide: MicroserviceProxy.MICROSERVICE_PROXY_SERVICE,
+					useClass: RabbitMQServiceMock
+				},
+				NotificationService
+			]
+		}).compile();
 
-    notificationController = module.get<NotificationController>(NotificationController);
-    notificationService = module.get<NotificationService>(NotificationService);
-  });
+		notificationController = module.get<NotificationController>(NotificationController);
+		notificationService = module.get<NotificationService>(NotificationService);
+	});
 
-  describe('notification', () => {
-    it('should return a ResponseNotificationDto', async () => {
-      const data: NotificationDto = {
-        topic: 'test',
-        resource: '/test/123',
-        user_id: 1
-      };
+	describe('notification', () => {
+		it('should return a ResponseNotificationDto', async () => {
+			const data: NotificationDto = {
+				topic: 'test',
+				resource: '/test/123',
+				user_id: 1
+			};
 
-      const response: ResponseNotificationDto = {
-        body: 'ok'
-       };
+			const response: ResponseNotificationDto = {
+				body: 'ok'
+			};
 
-      jest.spyOn(notificationService, 'notification').mockResolvedValue(response);
+			jest.spyOn(notificationService, 'notification').mockResolvedValue(response);
 
-      expect(await notificationController.notification(data)).toEqual(response);
-    });
-  });
+			expect(await notificationController.notification(data)).toEqual(response);
+		});
+	});
 });

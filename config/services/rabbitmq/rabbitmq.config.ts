@@ -2,6 +2,7 @@ import { Microservice } from '@lib/enum/index';
 import { MicroserviceType } from '@lib/type/index';
 import { ConfigService } from '@nestjs/config';
 import { Transport } from '@nestjs/microservices';
+import { serialize } from 'v8';
 
 export class RabbitMQConfig {
 	private scheme = 'amqp';
@@ -39,39 +40,50 @@ export class RabbitMQConfig {
 	}
 
 	public getOptions(microservice: MicroserviceType): any {
+		let formatData = false;
 		const queueOptions = {
 			[Microservice.NOTIFICATION]: () => {
 				this.queue = Microservice.NOTIFICATION;
 			},
 			[Microservice.ITEMS]: () => {
 				this.queue = Microservice.ITEMS;
+				formatData = true;
 			},
 			[Microservice.ITEMS2]: () => {
 				this.queue = Microservice.ITEMS2;
+				formatData = true;
 			},
 			[Microservice.LOG_SYNC]: () => {
 				this.queue = Microservice.LOG_SYNC;
+				formatData = true;
 			},
 			[Microservice.MESSAGES]: () => {
 				this.queue = Microservice.MESSAGES;
+				formatData = true;
 			},
 			[Microservice.ORDERS_V2]: () => {
 				this.queue = Microservice.ORDERS_V2;
+				formatData = true;
 			},
 			[Microservice.OTHERS]: () => {
 				this.queue = Microservice.OTHERS;
+				formatData = true;
 			},
 			[Microservice.PAYMENTS]: () => {
 				this.queue = Microservice.PAYMENTS;
+				formatData = true;
 			},
 			[Microservice.QUESTIONS]: () => {
 				this.queue = Microservice.QUESTIONS;
+				formatData = true;
 			},
 			[Microservice.SHIPMENTS]: () => {
 				this.queue = Microservice.SHIPMENTS;
+				formatData = true;
 			},
 			[Microservice.TEST]: () => {
 				this.queue = Microservice.TEST;
+				formatData = true;
 			}
 		};
 
@@ -86,6 +98,11 @@ export class RabbitMQConfig {
 				persistent: this.persistent,
 				queueOptions: {
 					durable: this.durable
+				},
+				serializer: {
+					serialize(value) {
+						return formatData ? value.data : value;
+					}
 				}
 			}
 		};

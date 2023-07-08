@@ -9,7 +9,7 @@ export class NotificationService {
 	constructor(
 		private configService: ConfigService,
 		@Inject(MicroserviceProxy.MICROSERVICE_PROXY_SERVICE) private publish: MicroserviceProxy
-		) {}
+	) {}
 
 	sendNotification(data) {
 		data['uuid'] = uuidv4();
