@@ -13,6 +13,6 @@ COPY . .
 
 RUN npm run build:microservices
 
-EXPOSE 8888
+EXPOSE 3200
 
 CMD [ "npm", "run", "start:docker" ]
