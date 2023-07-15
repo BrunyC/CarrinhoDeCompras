@@ -9,7 +9,6 @@ export class MicroserviceProxy {
 	public static readonly MICROSERVICE_PROXY_SERVICE = 'MICROSERVICE_PROXY_SERVICE';
 
 	constructor(
-		@Inject(Microservice.NOTIFICATION) private readonly microserviceNotification: ClientProxy,
 		@Inject(Microservice.ITEMS) private readonly microserviceItem: ClientProxy,
 		@Inject(Microservice.ITEMS2) private readonly microserviceItem2: ClientProxy,
 		@Inject(Microservice.LOG_SYNC) private readonly microserviceLogSync: ClientProxy,
@@ -36,7 +35,6 @@ export class MicroserviceProxy {
 
 	public getClientProxyByMicroservice(name: MicroserviceType): ClientProxy {
 		const microservice = {
-			[Microservice.NOTIFICATION]: () => this.microserviceNotification,
 			[Microservice.ITEMS]: () => this.microserviceItem,
 			[Microservice.ITEMS2]: () => this.microserviceItem2,
 			[Microservice.LOG_SYNC]: () => this.microserviceLogSync,
