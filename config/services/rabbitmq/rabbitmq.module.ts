@@ -8,13 +8,6 @@ import { RabbitMQConfig } from './rabbitmq.config';
 	imports: [],
 	providers: [
 		{
-			provide: Microservice.NOTIFICATION,
-			useFactory: (rabbitMqConfig: RabbitMQConfig) => {
-				rabbitMqConfig = new RabbitMQConfig();
-				return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.NOTIFICATION));
-			}
-		},
-		{
 			provide: Microservice.ITEMS,
 			useFactory: (rabbitMqConfig: RabbitMQConfig) => {
 				rabbitMqConfig = new RabbitMQConfig();

@@ -1,7 +1,7 @@
 import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';
-import { NotificationService } from './notification.service';
 import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { NotificationDto, ResponseNotificationDto } from '@lib/dto/microservices/notification/index';
+import { NotificationService } from '@notification/notification.service';
 
 @ApiTags('Meli')
 @Controller('Meli')
@@ -22,6 +22,10 @@ export class NotificationController {
 	})
 	@ApiOkResponse({ type: ResponseNotificationDto, description: 'ok' })
 	async notification(@Body() data: NotificationDto): Promise<ResponseNotificationDto> {
-		return this.notificationService.notification(data);
+		this.notificationService.sendNotification(data);
+
+		return {
+			body: 'ok'
+		};
 	}
 }

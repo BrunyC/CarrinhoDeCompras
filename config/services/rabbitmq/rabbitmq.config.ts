@@ -2,7 +2,6 @@ import { Microservice } from '@lib/enum/index';
 import { MicroserviceType } from '@lib/type/index';
 import { ConfigService } from '@nestjs/config';
 import { Transport } from '@nestjs/microservices';
-import { serialize } from 'v8';
 
 export class RabbitMQConfig {
 	private scheme = 'amqp';
@@ -42,9 +41,6 @@ export class RabbitMQConfig {
 	public getOptions(microservice: MicroserviceType): any {
 		let formatData = false;
 		const queueOptions = {
-			[Microservice.NOTIFICATION]: () => {
-				this.queue = Microservice.NOTIFICATION;
-			},
 			[Microservice.ITEMS]: () => {
 				this.queue = Microservice.ITEMS;
 				formatData = true;
