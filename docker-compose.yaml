@@ -8,7 +8,7 @@ networks:
 
 services:
   melicontrol-notification:
-    container_name: meli
+    container_name: meli-notifications
     build: .
     environment:
       PORT: 8888

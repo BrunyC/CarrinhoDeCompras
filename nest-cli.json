@@ -17,13 +17,13 @@
 				"tsConfigPath": "api/tsconfig.app.json"
 			}
 		},
-		"notification": {
+		"notifications": {
 			"type": "application",
-			"root": "microservices/notification",
+			"root": "microservices/notifications",
 			"entryFile": "main",
-			"sourceRoot": "microservices/notification/src",
+			"sourceRoot": "microservices/notifications/src",
 			"compilerOptions": {
-				"tsConfigPath": "microservices/notification/tsconfig.app.json"
+				"tsConfigPath": "microservices/notifications/tsconfig.app.json"
 			}
 		}
 	}

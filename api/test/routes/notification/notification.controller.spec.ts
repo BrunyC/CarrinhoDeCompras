@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { NotificationDto, ResponseNotificationDto } from '@lib/dto/microservices/notification/index';
+import { NotificationDto, ResponseNotificationDto } from 'lib/src/dto/microservices/notifications/index';
 import { MicroserviceProxy } from '@config/index';
 import { NotificationController } from '@api/routes/notification/notification.controller';
-import { NotificationService } from '@api/routes/notification/notification.service';
+import { NotificationService } from '@notifications/notification.service';
 
 export const RabbitMQServiceMock = jest.fn(() => ({
 	event: () => jest.fn().mockResolvedValue(undefined),

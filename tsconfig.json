@@ -27,8 +27,11 @@
       "@config/*": [
         "config/services/*"
       ],
-      "@lib/dto/microservices/notification/*": [
-        "lib/src/dto/microservices/notification/*"
+      "@lib/dto/microservices/notifications/*": [
+        "lib/src/dto/microservices/notifications/*"
+      ],
+      "@lib/dto/microservices/healthCheck/*": [
+        "lib/src/dto/microservices/healthCheck/*"
       ],
       "@lib/enum/*": [
         "lib/src/enum/*"
@@ -36,8 +39,8 @@
       "@lib/type/*": [
         "lib/src/type/*"
       ],
-      "@notification/*": [
-        "microservices/notification/src/*"
+      "@notifications/*": [
+        "microservices/notifications/src/*"
       ],
     }
   },
