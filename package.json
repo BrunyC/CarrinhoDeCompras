@@ -13,7 +13,7 @@
 		"stop:services": "cd melicontrol-microservices-docker && docker-compose stop && cd ..",
 		"start:service:rabbitmq": "cd melicontrol-microservices-docker && docker start melicontrol-rabbitmq-3.8.3 && cd ..",
 		"stop:service:rabbitmq": "cd melicontrol-microservices-docker && docker stop melicontrol-rabbitmq-3.8.3 && cd ..",
-		"build:microservices": "nest build api; nest build notifications",
+		"build:microservices": "nest build api; nest build ml-notifications",
 		"build:docker-compose": "docker compose build --no-cache",
 		"build:docker": "docker build --no-cache --force-rm .",
 		"lint:format": "eslint '{lib,microservices,config,api}/**/**/**/**/*.ts' --fix; prettier --write \"lib/**/**/**/**/*.ts\" \"api/**/**/**/*.ts\" \"config/**/**/**/*.ts\" \"microservices/**/**/**/**/*.ts\"",
@@ -67,13 +67,13 @@
 		"typescript": "^4.7.4"
 	},
 	"_moduleAliases": {
-		"@lib/dto/microservice/notifications": "lib/src/dto/microservices/notifications",
+		"@lib/dto/microservice/ml-notifications": "lib/src/dto/microservices/ml-notifications",
 		"@lib/enum": "lib/src/enum",
 		"@lib/type": "lib/src/type",
 		"@lib": "lib/src",
 		"@config": "config/services",
 		"@api": "api/src",
-		"@notifications": "microservices/notifications"
+		"@notifications": "microservices/ml-notifications"
 	},
 	"_moduleDirectories": [
 		"node_modules"

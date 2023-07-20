@@ -28,7 +28,7 @@
 	"javascript.format.insertSpaceBeforeFunctionParenthesis": true,
 	"javascript.updateImportsOnFileMove.enabled": "always",
 	"javascript.format.enable": false,
-	"window.zoomLevel": 1,
+	"window.zoomLevel": 0,
 	"files.autoSave": "afterDelay",
 	"breadcrumbs.enabled": true,
 	"element-helper.version": "2.5",

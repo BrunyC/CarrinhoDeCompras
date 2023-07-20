@@ -27,8 +27,8 @@
       "@config/*": [
         "config/services/*"
       ],
-      "@lib/dto/microservices/notifications/*": [
-        "lib/src/dto/microservices/notifications/*"
+      "@lib/dto/microservices/ml-notifications/*": [
+        "lib/src/dto/microservices/ml-notifications/*"
       ],
       "@lib/dto/microservices/healthCheck/*": [
         "lib/src/dto/microservices/healthCheck/*"
@@ -39,8 +39,8 @@
       "@lib/type/*": [
         "lib/src/type/*"
       ],
-      "@notifications/*": [
-        "microservices/notifications/src/*"
+      "@ml-notifications/*": [
+        "microservices/ml-notifications/src/*"
       ],
     }
   },
