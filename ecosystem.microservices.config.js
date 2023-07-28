@@ -8,11 +8,18 @@ module.exports = {
       },
     },
     {
-		name: 'notification',
-		script: 'dist/microservices/notification/main.js',
-		env: {
-			TZ: 'America/Sao_Paulo'
-		}
-	}
+      name: 'notification',
+      script: 'dist/microservices/notification/main.js',
+      env: {
+        TZ: 'America/Sao_Paulo'
+      }
+	  },
+    {
+      name: 'cart',
+      script: 'dist/microservices/cart/main.js',
+      env: {
+        TZ: 'America/Sao_Paulo'
+      }
+	  }
   ],
 };

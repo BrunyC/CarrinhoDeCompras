@@ -12,4 +12,5 @@ export type MicroserviceType =
 	| Microservice.PAYMENTS
 	| Microservice.QUESTIONS
 	| Microservice.SHIPMENTS
-	| Microservice.TEST;
+	| Microservice.TEST
+	| Microservice.CART;

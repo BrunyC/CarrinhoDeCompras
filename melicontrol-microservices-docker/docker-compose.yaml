@@ -7,9 +7,26 @@ networks:
     driver: bridge
 
 services:
+  mysql:
+    container_name: melicontrol-mysql-8.0
+    image: mysql:8.0
+    cap_add:
+      - SYS_NICE
+    environment:
+      - MYSQL_DATABASE=melicontrol
+      - MYSQL_ROOT_PASSWORD=main
+    ports:
+      - '3306:3306'
+    volumes:
+      - ./services/mysql/data:/var/lib/mysql
+      - ./services/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - meli-network
+      - internal
+  
   rabbitmq:
-    image: rabbitmq:3.8-management
     container_name: melicontrol-rabbitmq-3.8.3
+    image: rabbitmq:3.8-management
     volumes:
       - ./services/rabbitmq/data:/var/lib/rabbitmq/
     environment:

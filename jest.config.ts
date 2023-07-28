@@ -24,11 +24,13 @@ const config: Config.InitialOptions = {
 	},
 	moduleNameMapper: {
 		'^@lib/dto/microservices/notification/(.*)': ['<rootDir>/lib/src/dto/microservices/notification/$1'],
+		'^@lib/dto/microservices/cart/(.*)': ['<rootDir>/lib/src/dto/microservices/cart/$1'],
 		'^@lib/enum/(.*)': ['<rootDir>/lib/src/enum/$1'],
 		'^@lib/type/(.*)': ['<rootDir>/lib/src/type/$1'],
 		'^@config/(.*)': ['<rootDir>/config/services/$1'],
 		'^@api/(.*)': ['<rootDir>/api/src/$1'],
-		'^@notification/(.*)': ['<rootDir>/microservices/notification/src/$1']
+		'^@notification/(.*)': ['<rootDir>/microservices/notification/src/$1'],
+		'^@cart/(.*)': ['<rootDir>/microservices/cart/src/$1']
 	},
 	coverageDirectory: './coverage',
 	testEnvironment: 'node',

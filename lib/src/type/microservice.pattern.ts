@@ -1,3 +1,3 @@
-import { NotificationPattern } from '@lib/enum/index';
+import { CartPattern, NotificationPattern } from '@lib/enum/index';
 
-export type MicroservicePattern = NotificationPattern;
+export type MicroservicePattern = NotificationPattern | CartPattern;

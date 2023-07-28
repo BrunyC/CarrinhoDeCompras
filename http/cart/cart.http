@@ -1,0 +1,30 @@
+POST http://localhost:8888/cart
+Content-Type: application/json
+
+{
+	"user_id": 1,
+	"title": "cart-teste",
+	"status": true,
+	"default": false
+}
+
+###
+POST http://localhost:8888/cart/addItem
+Content-Type: application/json
+
+{
+	"cart_id": 1,
+	"product_id": 1,
+	"product_price_id": 1,
+	"months": 3,
+	"price": 100,
+	"status": true
+}
+###
+DELETE http://localhost:8888/cart/deleteItem
+Content-Type: application/json
+
+{
+	"cart_id": 1,
+	"product_id": 1
+}

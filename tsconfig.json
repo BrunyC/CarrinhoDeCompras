@@ -27,8 +27,14 @@
       "@config/*": [
         "config/services/*"
       ],
+      "@lib/dto/general/*": [
+        "lib/src/dto/general/*"
+      ],
       "@lib/dto/microservices/notification/*": [
         "lib/src/dto/microservices/notification/*"
+      ],
+      "@lib/dto/microservices/cart/*": [
+        "lib/src/dto/microservices/cart/*"
       ],
       "@lib/enum/*": [
         "lib/src/enum/*"
@@ -38,6 +44,9 @@
       ],
       "@notification/*": [
         "microservices/notification/src/*"
+      ],
+      "@cart/*": [
+        "microservices/cart/src/*"
       ],
     }
   },

@@ -80,6 +80,9 @@ export class RabbitMQConfig {
 			[Microservice.TEST]: () => {
 				this.queue = Microservice.TEST;
 				formatData = true;
+			},
+			[Microservice.CART]: () => {
+				this.queue = Microservice.CART;
 			}
 		};
 

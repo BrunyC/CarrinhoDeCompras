@@ -25,6 +25,15 @@
 			"compilerOptions": {
 				"tsConfigPath": "microservices/notification/tsconfig.app.json"
 			}
+		},
+		"cart": {
+			"type": "application",
+			"root": "microservices/cart",
+			"entryFile": "main",
+			"sourceRoot": "microservices/cart/src",
+			"compilerOptions": {
+				"tsConfigPath": "microservices/cart/tsconfig.app.json"
+			}
 		}
 	}
 }

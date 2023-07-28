@@ -21,5 +21,7 @@ export enum Microservice {
 
 	ITEMS2 = 'ml_notif_items2_queue',
 
-	TEST = 'ml_notif_test_queue'
+	TEST = 'ml_notif_test_queue',
+
+	CART = 'shop_cart'
 }

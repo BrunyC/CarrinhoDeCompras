@@ -18,7 +18,8 @@ export class MicroserviceProxy {
 		@Inject(Microservice.PAYMENTS) private readonly microservicePayment: ClientProxy,
 		@Inject(Microservice.QUESTIONS) private readonly microserviceQuestion: ClientProxy,
 		@Inject(Microservice.SHIPMENTS) private readonly microserviceShipment: ClientProxy,
-		@Inject(Microservice.TEST) private readonly microserviceTest: ClientProxy
+		@Inject(Microservice.TEST) private readonly microserviceTest: ClientProxy,
+		@Inject(Microservice.CART) private readonly microserviceCart: ClientProxy
 	) {}
 
 	public async message(microserviceName: MicroserviceType, pattern: MicroservicePattern, message: any | any[]): Promise<any> {
@@ -44,7 +45,8 @@ export class MicroserviceProxy {
 			[Microservice.PAYMENTS]: () => this.microservicePayment,
 			[Microservice.QUESTIONS]: () => this.microserviceQuestion,
 			[Microservice.SHIPMENTS]: () => this.microserviceShipment,
-			[Microservice.TEST]: () => this.microserviceTest
+			[Microservice.TEST]: () => this.microserviceTest,
+			[Microservice.CART]: () => this.microserviceCart
 		};
 
 		return microservice[name]();

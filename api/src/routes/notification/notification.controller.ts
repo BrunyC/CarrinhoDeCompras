@@ -1,7 +1,7 @@
 import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
 import { NotificationDto, ResponseNotificationDto } from '@lib/dto/microservices/notification/index';
-import { NotificationService } from '@notification/notification.service';
+import { NotificationService } from 'microservices/notification/src/notification.service';
 
 @ApiTags('Meli')
 @Controller('Meli')
