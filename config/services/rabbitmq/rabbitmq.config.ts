@@ -1,4 +1,4 @@
-import { Microservice } from '@lib/enum/index';
+import { LogSyncQueueArgs, Microservice } from '@lib/enum/index';
 import { MicroserviceType } from '@lib/type/index';
 import { ConfigService } from '@nestjs/config';
 import { Transport } from '@nestjs/microservices';
@@ -40,6 +40,7 @@ export class RabbitMQConfig {
 
 	public getOptions(microservice: MicroserviceType): any {
 		let formatData = false;
+		let args = {};
 		const queueOptions = {
 			[Microservice.ITEMS]: () => {
 				this.queue = Microservice.ITEMS;
@@ -52,6 +53,10 @@ export class RabbitMQConfig {
 			[Microservice.LOG_SYNC]: () => {
 				this.queue = Microservice.LOG_SYNC;
 				formatData = true;
+				args = {
+					'x-dead-letter-exchange': LogSyncQueueArgs.DEAD_LETTER,
+					'x-dead-letter-routing-key': LogSyncQueueArgs.DEAD_LETTER_KEY
+				};
 			},
 			[Microservice.MESSAGES]: () => {
 				this.queue = Microservice.MESSAGES;
@@ -96,7 +101,8 @@ export class RabbitMQConfig {
 				noAck: this.noAck,
 				persistent: this.persistent,
 				queueOptions: {
-					durable: this.durable
+					durable: this.durable,
+					arguments: args
 				},
 				serializer: {
 					serialize(value) {

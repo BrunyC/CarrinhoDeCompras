@@ -1,6 +1,6 @@
 import { MicroserviceProxy } from '@config/index';
 import { ConfigService } from '@nestjs/config';
-import { NotificationService } from 'microservices/notification/src/notification.service';
+import { NotificationService } from 'microservices/ml-notifications/src/notification.service';
 
 export const ClientProxyMock: any = jest.fn(() => ({
 	emit: jest.fn().mockReturnValue(undefined),
@@ -14,7 +14,6 @@ describe('NotificationService', () => {
 
 	beforeEach(async () => {
 		microserviceProxy = new MicroserviceProxy(
-			ClientProxyMock,
 			ClientProxyMock,
 			ClientProxyMock,
 			ClientProxyMock,

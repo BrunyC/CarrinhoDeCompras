@@ -1,45 +1,41 @@
-version: "3"
+version: '3'
 
 networks:
-  internal:
-    external: true
-  meli-network:
-    driver: bridge
+    internal:
+        external: true
 
 services:
-  # melicontrol-notification:
-  #   container_name: meli
-  #   build: .
-  #   environment:
-  #     PORT: 8888
-  #     RMQ_HOST: melicontrol-rabbitmq-3.8.3
-  #     RMQ_USERNAME: main
-  #     RMQ_PASSWORD: main
-  #     RMQ_PORT: 5672
-  #     RMQ_VHOST: ''
-  #     LOG_SYNC: 1
-  #   volumes:
-  #     - .:/usr/src/app
-  #   ports:
-  #     - "8888:8888"
-  #   networks:
-  #     - meli-network
-  #     - internal
- 
-  ml_notification:
-    image: melicontainerregistry.azurecr.io/melicontrolmicroservices-melicontrol-notification:latest
-    container_name: ml_notification
-    environment:
-      PORT: 3200
-      RMQ_HOST: mcrabbitmq04.eastus.cloudapp.azure.com
-      RMQ_USERNAME: azure
-      RMQ_PASSWORD: MLFacil2017
-      RMQ_PORT: 5672
-      RMQ_VHOST: ''
-      RMQ_QUEUE_DURABLE_CONFIG: "true"
-      LOG_SYNC: 1
-    ports:
-      - 3200:3200
-    networks:
-      - internal
+    meli-notification:
+        container_name: meli-notification
+        build: .
+        environment:
+            PORT: 3200
+            RMQ_HOST: mcrabbitmq04.eastus.cloudapp.azure.com
+            RMQ_USERNAME: azure
+            RMQ_PASSWORD: MLFacil2017
+            RMQ_PORT: 5672
+            RMQ_VHOST: ''
+            RMQ_QUEUE_DURABLE_CONFIG: 'true'
+        volumes:
+            - .:/usr/src/app
+        ports:
+            - 3200:3200
+        networks:
+            - internal
 
+    # meli-notification:
+    #   image: melicontainerregistry.azurecr.io/melicontrolmicroservices-meli-notification:latest
+    #   container_name: meli-notification
+    #   environment:
+    #     PORT: 3200
+    #     RMQ_HOST: mcrabbitmq04.eastus.cloudapp.azure.com
+    #     RMQ_USERNAME: azure
+    #     RMQ_PASSWORD: MLFacil2017
+    #     RMQ_PORT: 5672
+    #     RMQ_VHOST: ''
+    #     RMQ_QUEUE_DURABLE_CONFIG: "true"
+    #     LOG_SYNC: 1
+    #   ports:
+    #     - 3200:3200
+    #   networks:
+    #     - internal

@@ -23,13 +23,13 @@ const config: Config.InitialOptions = {
 		'^.+\\.(js|ts)$': 'ts-jest'
 	},
 	moduleNameMapper: {
-		'^@lib/dto/microservices/notification/(.*)': ['<rootDir>/lib/src/dto/microservices/notification/$1'],
+		'^@lib/dto/microservices/ml-notifications/(.*)': ['<rootDir>/lib/src/dto/microservices/ml-notifications/$1'],
 		'^@lib/dto/microservices/cart/(.*)': ['<rootDir>/lib/src/dto/microservices/cart/$1'],
 		'^@lib/enum/(.*)': ['<rootDir>/lib/src/enum/$1'],
 		'^@lib/type/(.*)': ['<rootDir>/lib/src/type/$1'],
 		'^@config/(.*)': ['<rootDir>/config/services/$1'],
 		'^@api/(.*)': ['<rootDir>/api/src/$1'],
-		'^@notification/(.*)': ['<rootDir>/microservices/notification/src/$1'],
+		'^@ml-notifications/(.*)': ['<rootDir>/microservices/ml-notifications/src/$1'],
 		'^@cart/(.*)': ['<rootDir>/microservices/cart/src/$1']
 	},
 	coverageDirectory: './coverage',
@@ -38,7 +38,7 @@ const config: Config.InitialOptions = {
 		'api/test',
 		'lib/test',
 		'config/test',
-		'microservices/notification/test'
+		'microservices/ml-notifications/test'
 	],
 	displayName: {
 		name: 'Microservices Unit Tests',

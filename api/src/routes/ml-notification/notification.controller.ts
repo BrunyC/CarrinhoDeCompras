@@ -1,10 +1,10 @@
 import { Body, Controller, Post, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ApiBody, ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { NotificationDto, ResponseNotificationDto } from '@lib/dto/microservices/notification/index';
-import { NotificationService } from 'microservices/notification/src/notification.service';
+import { NotificationService } from 'microservices/ml-notifications/src/notification.service';
+import { NotificationDto, ResponseNotificationDto } from 'lib/src/dto/microservices/ml-notifications/index';
 
 @ApiTags('Meli')
-@Controller('Meli')
+@Controller('Meli/notifications')
 export class NotificationController {
 	constructor(private readonly notificationService: NotificationService) {}
 

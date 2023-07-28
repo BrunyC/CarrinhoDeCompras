@@ -8,8 +8,8 @@ module.exports = {
       },
     },
     {
-      name: 'notification',
-      script: 'dist/microservices/notification/main.js',
+      name: 'ml-notifications',
+      script: 'dist/microservices/ml-notifications/main.js',
       env: {
         TZ: 'America/Sao_Paulo'
       }

@@ -30,8 +30,11 @@
       "@lib/dto/general/*": [
         "lib/src/dto/general/*"
       ],
-      "@lib/dto/microservices/notification/*": [
-        "lib/src/dto/microservices/notification/*"
+      "@lib/dto/microservices/ml-notifications/*": [
+        "lib/src/dto/microservices/ml-notifications/*"
+      ],
+      "@lib/dto/microservices/healthCheck/*": [
+        "lib/src/dto/microservices/healthCheck/*"
       ],
       "@lib/dto/microservices/cart/*": [
         "lib/src/dto/microservices/cart/*"
@@ -42,8 +45,8 @@
       "@lib/type/*": [
         "lib/src/type/*"
       ],
-      "@notification/*": [
-        "microservices/notification/src/*"
+      "@ml-notifications/*": [
+        "microservices/ml-notifications/src/*"
       ],
       "@cart/*": [
         "microservices/cart/src/*"

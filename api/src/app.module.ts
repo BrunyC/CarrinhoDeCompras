@@ -1,12 +1,13 @@
 import { Global, Module } from '@nestjs/common';
 import { RabbitMQModule } from '@config/index';
-import { NotificationModule } from './routes/notification/notification.module';
 import { ConfigModule } from '@nestjs/config';
+import { NotificationModule } from './routes/ml-notification/notification.module';
+import { HealthCheckModule } from './routes/healtCheck/healthCheck.module';
 import { CartModule } from './routes/cart/cart.module';
 
 @Global()
 @Module({
-	imports: [ConfigModule.forRoot({}), RabbitMQModule, NotificationModule, CartModule],
+	imports: [ConfigModule.forRoot({}), RabbitMQModule, NotificationModule, HealthCheckModule, CartModule],
 	exports: [RabbitMQModule, ConfigModule.forRoot()],
 	providers: []
 })

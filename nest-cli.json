@@ -17,13 +17,13 @@
 				"tsConfigPath": "api/tsconfig.app.json"
 			}
 		},
-		"notification": {
+		"ml-notifications": {
 			"type": "application",
-			"root": "microservices/notification",
+			"root": "microservices/ml-notifications",
 			"entryFile": "main",
-			"sourceRoot": "microservices/notification/src",
+			"sourceRoot": "microservices/ml-notifications/src",
 			"compilerOptions": {
-				"tsConfigPath": "microservices/notification/tsconfig.app.json"
+				"tsConfigPath": "microservices/ml-notifications/tsconfig.app.json"
 			}
 		},
 		"cart": {

@@ -1,8 +1,8 @@
-POST http://localhost:3200/Meli
+POST http://localhost:3200/Meli/notifications
 Content-Type: application/json
 
 {
-	"topic": "payments",
+	"topic": "items",
 	"resource": "/items/MLB1675189448",
 	"user_id": 260510465
 }
