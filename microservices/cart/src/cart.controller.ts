@@ -8,6 +8,24 @@ import { CartDto, CartItemDto, DeleteCartItemDto } from '@lib/dto/microservices/
 export class CartController {
 	constructor(private cartService: CartService) {}
 
+	@MessagePattern(CartPattern.GET_CART)
+	async getCart(@Payload() userId: number, @Ctx() context: RmqContext): Promise<any> {
+		const channel = context.getChannelRef();
+		const message = context.getMessage();
+
+		try {
+			const result = await this.cartService.getCart(userId);
+
+			channel.ack(message);
+
+			return result;
+		} catch (error) {
+			channel.ack(message);
+
+			throw error;
+		}
+	}
+
 	@MessagePattern(CartPattern.POST_CART)
 	async createCart(@Payload() cart: CartDto, @Ctx() context: RmqContext): Promise<any> {
 		const channel = context.getChannelRef();

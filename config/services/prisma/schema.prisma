@@ -27,7 +27,7 @@ model Cart {
   default     Boolean
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
-  cart_items  CartItems[] 
+  cart_items  CartItems[]
 }
 
 model CartItems {

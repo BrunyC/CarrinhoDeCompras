@@ -7,10 +7,7 @@ import { Microservice } from '@lib/enum/index';
 const rabbitMqConfig = new RabbitMQConfig();
 
 async function bootstrap() {
-	const app = await NestFactory.createMicroservice<MicroserviceOptions>(
-		CartModule,
-		rabbitMqConfig.getOptions(Microservice.CART)
-	);
+	const app = await NestFactory.createMicroservice<MicroserviceOptions>(CartModule, rabbitMqConfig.getOptions(Microservice.CART));
 
 	await app.listen();
 }

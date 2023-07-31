@@ -1,9 +1,13 @@
+GET http://localhost:8888/cart/1
+Content-Type: application/json
+
+###
 POST http://localhost:8888/cart
 Content-Type: application/json
 
 {
-	"user_id": 1,
-	"title": "cart-teste",
+	"user_id": 2,
+	"title": "cart-teste-3",
 	"status": true,
 	"default": false
 }

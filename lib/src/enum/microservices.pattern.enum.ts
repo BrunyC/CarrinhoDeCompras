@@ -13,4 +13,3 @@ export enum CartPattern {
 
 	REMOVE_CART = 'cart.removeCart'
 }
-

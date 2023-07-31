@@ -23,8 +23,10 @@ const config: Config.InitialOptions = {
 		'^.+\\.(js|ts)$': 'ts-jest'
 	},
 	moduleNameMapper: {
+		'^@lib/dto/microservices/healthCheck/(.*)': ['<rootDir>/lib/src/dto/microservices/healthCheck/$1'],
 		'^@lib/dto/microservices/ml-notifications/(.*)': ['<rootDir>/lib/src/dto/microservices/ml-notifications/$1'],
 		'^@lib/dto/microservices/cart/(.*)': ['<rootDir>/lib/src/dto/microservices/cart/$1'],
+		'^@lib/dto/general/(.*)': ['<rootDir>/lib/src/dto/general/$1'],
 		'^@lib/enum/(.*)': ['<rootDir>/lib/src/enum/$1'],
 		'^@lib/type/(.*)': ['<rootDir>/lib/src/type/$1'],
 		'^@config/(.*)': ['<rootDir>/config/services/$1'],

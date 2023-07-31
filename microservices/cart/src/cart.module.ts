@@ -6,11 +6,7 @@ import { ConfigModule } from '@nestjs/config';
 import { PrismaModule } from '@config/prisma/prisma.module';
 
 @Module({
-	imports: [
-		ConfigModule.forRoot(),
-		RabbitMQModule,
-		PrismaModule
-	],
+	imports: [ConfigModule.forRoot(), RabbitMQModule, PrismaModule],
 	controllers: [CartController],
 	providers: [CartService],
 	exports: [CartService]

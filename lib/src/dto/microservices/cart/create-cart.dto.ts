@@ -14,11 +14,11 @@ export class CartDto {
 
 	@ApiProperty({ type: 'boolean' })
 	@IsNotEmpty()
-    @IsBoolean()
+	@IsBoolean()
 	status: boolean;
 
-    @ApiProperty({ type: 'boolean' })
+	@ApiProperty({ type: 'boolean' })
 	@IsNotEmpty()
-    @IsBoolean()
+	@IsBoolean()
 	default: boolean;
 }
