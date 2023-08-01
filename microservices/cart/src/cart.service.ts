@@ -1,8 +1,8 @@
 import { HttpStatus, Injectable, Logger } from '@nestjs/common';
-import { PrismaService } from '@config/prisma/prisma.service';
 import { CartDto, CartItemDto, DeleteCartItemDto } from '@lib/dto/microservices/cart/index';
 import { RpcException } from '@nestjs/microservices';
 import { ExceptionObjectDto } from '@lib/dto/general/index';
+import { PrismaService } from '../../../prisma/prisma.service';
 
 @Injectable()
 export class CartService {
