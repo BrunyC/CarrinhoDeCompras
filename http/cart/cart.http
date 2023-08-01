@@ -1,27 +1,27 @@
-GET http://localhost:8888/cart/1
+GET http://localhost:3000/cart/1
 Content-Type: application/json
 
 ###
-POST http://localhost:8888/cart
+POST http://localhost:3000/cart
 Content-Type: application/json
 
 {
 	"user_id": 2,
-	"title": "cart-teste-3",
+	"title": "cart-teste-2",
 	"status": true,
 	"default": false
 }
 
 ###
-POST http://localhost:8888/cart/addItem
+POST http://localhost:3000/cart/addItem
 Content-Type: application/json
 
 {
-	"cart_id": 1,
-	"product_id": 1,
-	"product_price_id": 1,
-	"months": 3,
-	"price": 100,
+	"cart_id": 4,
+	"product_id": 3,
+	"product_price_id": 3,
+	"months": 12,
+	"price": 350,
 	"status": true
 }
 ###
@@ -29,6 +29,6 @@ DELETE http://localhost:8888/cart/deleteItem
 Content-Type: application/json
 
 {
-	"cart_id": 1,
+	"cart_id": 4,
 	"product_id": 1
 }

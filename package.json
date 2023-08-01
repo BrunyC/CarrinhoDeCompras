@@ -8,23 +8,27 @@
 	"scripts": {
 		"prebuild": "rimraf dist",
 		"build": "nest build",
-		"build:services": "cd melicontrol-microservices-docker && docker-compose up --no-start && cd ..",
-		"start:services": "cd melicontrol-microservices-docker && docker-compose start && cd ..",
-		"stop:services": "cd melicontrol-microservices-docker && docker-compose stop && cd ..",
-		"start:service:rabbitmq": "cd melicontrol-microservices-docker && docker start melicontrol-rabbitmq-3.8.3 && cd ..",
-		"stop:service:rabbitmq": "cd melicontrol-microservices-docker && docker stop melicontrol-rabbitmq-3.8.3 && cd ..",
+		"build:services": "cd melicontrol-services-docker && docker-compose up --no-start && cd ..",
+		"start:services": "cd melicontrol-services-docker && docker-compose start && cd ..",
+		"stop:services": "cd melicontrol-services-docker && docker-compose stop && cd ..",
+		"start:service:rabbitmq": "cd melicontrol-services-docker && docker start melicontrol-rabbitmq-3.8.3 && cd ..",
+		"stop:service:rabbitmq": "cd melicontrol-services-docker && docker stop melicontrol-rabbitmq-3.8.3 && cd ..",
 		"build:microservices": "nest build api; nest build ml-notifications; nest build cart",
+		"build:ml-api": "nest build api",
+		"build:ml-notifications": "nest build ml-notifications",
+		"build:ml-cart": "nest build cart",
 		"build:docker-compose": "docker compose build --no-cache",
 		"build:docker": "docker build --no-cache --force-rm .",
-    	"prisma:migrate": "npx prisma migrate dev --name meli",
+		"prisma:migrate": "npx prisma migrate dev --name meli",
+		"prisma:generate": "npx prisma generate",
 		"lint:format": "eslint '{lib,microservices,config,api}/**/**/**/**/*.ts' --fix; prettier --write \"lib/**/**/**/**/*.ts\" \"api/**/**/**/*.ts\" \"config/**/**/**/*.ts\" \"microservices/**/**/**/**/*.ts\"",
 		"start:debug": "nest start --debug --watch",
 		"start:prod": "node dist/main",
-		"start": "pm2 start ecosystem.microservices.config.js",
-		"start:dev": "pm2 start ecosystem.microservices.config.js; pm2 logs",
-		"start:docker": "pm2-runtime start ecosystem.microservices.config.js",
-		"stop:production": "env pm2 stop ecosystem.microservices.config.js; pm2 flush",
-		"restart:production": "env pm2 restart ecosystem.microservices.config.js; pm2 flush",
+		"start": "pm2 start config/ecosystem/ecosystem.microservices.config.js",
+		"start:dev": "pm2 start config/ecosystem/ecosystem.microservices.config.js; pm2 logs",
+		"start:docker:ml-api": "pm2-runtime start config/ecosystem/ecosystem.api.config.js",
+		"start:docker:ml-notifications": "pm2-runtime start config/ecosystem/ecosystem.ml-notifications.config.js",
+		"start:docker:ml-cart": "pm2-runtime start config/ecosystem/ecosystem.cart.config.js",
 		"test": "jest",
 		"test:watch": "jest --watch",
 		"test:unit:cov": "jest --coverage --runInBand --detectOpenHandles --no-cache --config ./jest.config.ts",
@@ -37,7 +41,7 @@
 		"@nestjs/microservices": "^9.4.2",
 		"@nestjs/platform-express": "^9.0.0",
 		"@nestjs/swagger": "^6.3.0",
-    "@prisma/client": "^5.0.0",
+		"@prisma/client": "^5.0.0",
 		"amqp-connection-manager": "^4.1.13",
 		"amqplib": "^0.10.3",
 		"class-transformer": "^0.5.1",
@@ -61,7 +65,7 @@
 		"eslint-plugin-prettier": "^4.0.0",
 		"jest": "28.1.3",
 		"prettier": "^2.3.2",
-    "prisma": "^5.0.0",
+		"prisma": "^5.0.0",
 		"supertest": "^6.1.3",
 		"ts-jest": "28.0.8",
 		"ts-loader": "^9.2.3",
@@ -71,20 +75,19 @@
 	},
 	"_moduleAliases": {
 		"@lib/dto/microservice/ml-notifications": "lib/src/dto/microservices/ml-notifications",
-    "@lib/dto/microservice/cart": "lib/src/dto/microservices/cart",
+		"@lib/dto/microservice/cart": "lib/src/dto/microservices/cart",
 		"@lib/enum": "lib/src/enum",
 		"@lib/type": "lib/src/type",
 		"@lib": "lib/src",
 		"@config": "config/services",
 		"@api": "api/src",
 		"@notifications": "microservices/ml-notifications",
-    "@cart": "microservices/cart"
-
+		"@cart": "microservices/cart"
 	},
 	"_moduleDirectories": [
 		"node_modules"
 	],
-  "prisma": {
-    "schema": "config/services/prisma/schema.prisma"
-  }
+	"prisma": {
+		"schema": "prisma/schema.prisma"
+	}
 }

@@ -1,0 +1,11 @@
+module.exports = {
+  apps: [
+    {
+      name: 'ml-notifications',
+      script: './dist/microservices/ml-notifications/main.js',
+      env: {
+        TZ: 'America/Sao_Paulo'
+      }
+    }
+  ]
+};

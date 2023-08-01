@@ -5,29 +5,64 @@ networks:
         external: true
 
 services:
-    meli-notification:
-        container_name: meli-notification
-        build: .
+    meli-api:
+        container_name: meli-api
+        build:
+            context: .
+            dockerfile: ./melicontrol-microservices-docker/meli-api.Dockerfile
         environment:
-            PORT: 3200
-            RMQ_HOST: mcrabbitmq04.eastus.cloudapp.azure.com
-            RMQ_USERNAME: azure
-            RMQ_PASSWORD: MLFacil2017
+            PORT: 3000
+            RMQ_HOST: melicontrol-rabbitmq-3.8.3
+            RMQ_USERNAME: main
+            RMQ_PASSWORD: main
             RMQ_PORT: 5672
             RMQ_VHOST: ''
             RMQ_QUEUE_DURABLE_CONFIG: 'true'
-        volumes:
-            - .:/usr/src/app
         ports:
-            - 3200:3200
+            - 3000:3000
         networks:
             - internal
 
+    meli-notifications:
+        container_name: meli-notifications
+        build:
+            context: .
+            dockerfile: ./melicontrol-microservices-docker/meli-notification.Dockerfile
+        environment:
+            RMQ_HOST: melicontrol-rabbitmq-3.8.3
+            RMQ_USERNAME: main
+            RMQ_PASSWORD: main
+            RMQ_PORT: 5672
+            RMQ_VHOST: ''
+            RMQ_QUEUE_DURABLE_CONFIG: 'true'
+        networks:
+            - internal
+
+    meli-cart:
+        container_name: meli-cart
+        build:
+            context: .
+            dockerfile: ./melicontrol-microservices-docker/meli-cart.Dockerfile
+        environment:
+            RMQ_HOST: melicontrol-rabbitmq-3.8.3
+            RMQ_USERNAME: main
+            RMQ_PASSWORD: main
+            RMQ_PORT: 5672
+            RMQ_VHOST: ''
+            RMQ_QUEUE_DURABLE_CONFIG: 'true'
+            DB_HOST: melicontrol-mysql-8.0
+            DB_PORT: 3306
+            DB_USER: root
+            DB_PASSWORD: main
+            DB_NAME: melicontrol
+            DATABASE_URL: 'mysql://root:main@melicontrol-mysql-8.0:3306/melicontrol'
+        networks:
+            - internal
+            
     # meli-notification:
     #   image: melicontainerregistry.azurecr.io/melicontrolmicroservices-meli-notification:latest
     #   container_name: meli-notification
     #   environment:
-    #     PORT: 3200
     #     RMQ_HOST: mcrabbitmq04.eastus.cloudapp.azure.com
     #     RMQ_USERNAME: azure
     #     RMQ_PASSWORD: MLFacil2017
@@ -35,7 +70,5 @@ services:
     #     RMQ_VHOST: ''
     #     RMQ_QUEUE_DURABLE_CONFIG: "true"
     #     LOG_SYNC: 1
-    #   ports:
-    #     - 3200:3200
     #   networks:
     #     - internal

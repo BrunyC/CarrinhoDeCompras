@@ -37,6 +37,20 @@ npm run start:service:[Service]
 npm run stop:service:[Service]
 ```
 
+## Prisma
+
+## To migrate database
+
+```bash
+npm run prisma:migrate
+```
+
+## To generate database
+
+```bash
+npm run prisma:generate
+```
+
 ## Microservices
 
 ## Build Microservices
@@ -116,22 +130,28 @@ npm run test:unit:cov
 
 ## Docker
 
-## To build docker image
+## To build meli-notification docker image
 
 ```bash
-npm run build:docker
+docker compose build meli-notification
 ```
 
-## To build and start docker 
+## To build and execute meli-notification docker
 
 ```bash
-docker compose up
+docker compose up -d meli-notification --build
 ```
 
-## To build and start docker in background
+## To build cart docker image
 
 ```bash
-docker compose up -d
+docker compose build meli-cart
+```
+
+## To build and execute cart docker image
+
+```bash
+docker compose up -d meli-cart --build
 ```
 
 ## Docs

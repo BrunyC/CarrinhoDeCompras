@@ -4,6 +4,6 @@ node_modules
 dist
 .env
 .env.example
-melicontrol-microservices-docker
+melicontrol-services-docker
 http
 README.md
