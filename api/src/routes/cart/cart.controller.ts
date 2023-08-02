@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CartService } from './cart.service';
 import {
 	ApiBadRequestResponse,
@@ -10,7 +10,7 @@ import {
 	ApiTags,
 	ApiUnauthorizedResponse
 } from '@nestjs/swagger';
-import { CartDto, CartItemDto, DeleteCartItemDto } from '@lib/dto/microservices/cart/index';
+import { CartDto, CartItemDto, UpdateCartDto } from '@lib/dto/microservices/cart/index';
 import { ResponseTypeDto } from '@lib/dto/general/index';
 
 @ApiTags('Cart')
@@ -18,13 +18,13 @@ import { ResponseTypeDto } from '@lib/dto/general/index';
 export class CartController {
 	constructor(private readonly cartService: CartService) {}
 
-	@Get('/:id')
+	@Get('/:userId')
 	@ApiOkResponse({ type: ResponseTypeDto, description: 'Cart found.' })
 	@ApiBadRequestResponse({ type: ResponseTypeDto, description: 'An error ocurred. A message explaining will be notified.' })
 	@ApiNotFoundResponse({ type: ResponseTypeDto, description: 'No records found with these parameters.' })
 	@ApiInternalServerErrorResponse({ type: ResponseTypeDto, description: 'An error ocurred. A message explaining will be notified.' })
 	@ApiUnauthorizedResponse({ type: ResponseTypeDto, description: 'Unauthorized' })
-	async getCart(@Param('id') userId: string): Promise<ResponseTypeDto> {
+	async getCart(@Param('userId') userId: string): Promise<ResponseTypeDto> {
 		return this.cartService.getCart(Number(userId));
 	}
 
@@ -42,6 +42,20 @@ export class CartController {
 		return this.cartService.createCart(cart);
 	}
 
+	@Put('/:id')
+	@UsePipes(new ValidationPipe({ transform: true, whitelist: true, forbidUnknownValues: true }))
+	@ApiBody({
+		type: UpdateCartDto,
+		description: 'The body request is a json.'
+	})
+	@ApiCreatedResponse({ type: ResponseTypeDto, description: 'The cart has been successfully updated.' })
+	@ApiBadRequestResponse({ type: ResponseTypeDto, description: 'An error occurred. A message explaining will be notified.' })
+	@ApiInternalServerErrorResponse({ type: ResponseTypeDto, description: 'An error occurred. A message explaining will be notified.' })
+	@ApiUnauthorizedResponse({ type: ResponseTypeDto, description: 'Unauthorized' })
+	async updateCart(@Param('id') id: string, @Body() cart: UpdateCartDto): Promise<ResponseTypeDto> {
+		return this.cartService.updateCart(Number(id), cart);
+	}
+
 	@Post('/addItem')
 	@UsePipes(new ValidationPipe({ transform: true, whitelist: true, forbidUnknownValues: true }))
 	@ApiBody({
@@ -56,16 +70,12 @@ export class CartController {
 		return this.cartService.addCartItem(cartItem);
 	}
 
-	@Delete('/deleteItem')
-	@UsePipes(new ValidationPipe({ transform: true, whitelist: true, forbidUnknownValues: true }))
-	@ApiBody({
-		description: 'The body request is a json.'
-	})
+	@Delete('/deleteItem/:id')
 	@ApiOkResponse({ type: ResponseTypeDto, description: 'The item has been successfully deleted on cart.' })
 	@ApiBadRequestResponse({ type: ResponseTypeDto, description: 'An error occurred. A message explaining will be notified.' })
 	@ApiInternalServerErrorResponse({ type: ResponseTypeDto, description: 'An error occurred. A message explaining will be notified.' })
 	@ApiUnauthorizedResponse({ type: ResponseTypeDto, description: 'Unauthorized' })
-	async deleteCartItem(@Body() deleteItem: DeleteCartItemDto): Promise<ResponseTypeDto> {
-		return this.cartService.deleteCartItem(deleteItem);
+	async deleteCartItem(@Param('id') id: string): Promise<ResponseTypeDto> {
+		return this.cartService.deleteCartItem(Number(id));
 	}
 }

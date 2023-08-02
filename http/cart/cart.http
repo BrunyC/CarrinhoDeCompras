@@ -13,22 +13,27 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/cart/addItem
+PUT http://localhost:8888/cart/22
 Content-Type: application/json
 
 {
-	"cart_id": 4,
-	"product_id": 3,
-	"product_price_id": 3,
-	"months": 12,
-	"price": 350,
+	"title": "cart-teste-2",
+	"status": true,
+	"default": false
+}
+
+###
+POST http://localhost:8888/cart/addItem
+Content-Type: application/json
+
+{
+	"cart_id": 5,
+	"product_id": 1,
+	"product_price_id": 1,
+	"months": 3,
+	"price": 100,
 	"status": true
 }
 ###
-DELETE http://localhost:8888/cart/deleteItem
+DELETE http://localhost:8888/cart/deleteItem/19
 Content-Type: application/json
-
-{
-	"cart_id": 4,
-	"product_id": 1
-}

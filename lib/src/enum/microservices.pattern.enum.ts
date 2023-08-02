@@ -7,6 +7,8 @@ export enum CartPattern {
 
 	POST_CART = 'cart.postCart',
 
+	UPDATE_CART = 'cart.updateCart',
+
 	POST_CART_ITEM = 'cart.postCartItem',
 
 	REMOVE_ITEM_FROM_CART = 'cart.removeCartItem',

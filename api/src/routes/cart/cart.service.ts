@@ -1,6 +1,6 @@
 import { MicroserviceProxy } from '@config/index';
 import { ResponseTypeDto } from '@lib/dto/general/response-type.dto';
-import { CartDto, CartItemDto, DeleteCartItemDto } from '@lib/dto/microservices/cart/index';
+import { CartDto, CartItemDto, UpdateCartDto } from '@lib/dto/microservices/cart/index';
 import { CartPattern, Microservice } from '@lib/enum/index';
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 
@@ -28,14 +28,20 @@ export class CartService {
 		return data;
 	}
 
+	async updateCart(id: number, cart: UpdateCartDto): Promise<any> {
+		const { data } = await this.publish.message(Microservice.CART, CartPattern.UPDATE_CART, { id, cart });
+
+		return data;
+	}
+
 	async addCartItem(cartItem: CartItemDto): Promise<ResponseTypeDto> {
 		const { data } = await this.publish.message(Microservice.CART, CartPattern.POST_CART_ITEM, cartItem);
 
 		return data;
 	}
 
-	async deleteCartItem(deleteItem: DeleteCartItemDto): Promise<ResponseTypeDto> {
-		const { data } = await this.publish.message(Microservice.CART, CartPattern.REMOVE_ITEM_FROM_CART, deleteItem);
+	async deleteCartItem(id: number): Promise<ResponseTypeDto> {
+		const { data } = await this.publish.message(Microservice.CART, CartPattern.REMOVE_ITEM_FROM_CART, id);
 
 		return data;
 	}

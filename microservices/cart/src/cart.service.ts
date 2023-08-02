@@ -1,5 +1,5 @@
 import { HttpStatus, Injectable, Logger } from '@nestjs/common';
-import { CartDto, CartItemDto, DeleteCartItemDto } from '@lib/dto/microservices/cart/index';
+import { CartDto, CartItemDto, UpdateCartDto } from '@lib/dto/microservices/cart/index';
 import { RpcException } from '@nestjs/microservices';
 import { ExceptionObjectDto } from '@lib/dto/general/index';
 import { PrismaService } from '../../../prisma/prisma.service';
@@ -68,12 +68,10 @@ export class CartService {
 			});
 	}
 
-	private updateCartItem(cartId, data) {
+	private updateCartItem(param, data) {
 		return this.prisma.cartItems
 			.updateMany({
-				where: {
-					cart_id: cartId
-				},
+				where: param,
 				data: data
 			})
 			.then(() => {
@@ -106,6 +104,21 @@ export class CartService {
 			});
 	}
 
+	updateCart(id: number, cart: UpdateCartDto): Promise<any> {
+		return this.prisma.cart
+			.update({
+				where: { id: id },
+				data: cart
+			})
+			.then(() => {
+				Logger.log('Cart successfully updated', 'UpdateCart');
+				return { data: { statusCode: HttpStatus.OK, result: 'Carrinho atualizado com sucesso.' } };
+			})
+			.catch((error) => {
+				throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, error.message));
+			});
+	}
+
 	async addCartItem(cartItemDto: CartItemDto): Promise<any> {
 		const { cart_id } = cartItemDto;
 		const subTotalPrice = Number(cartItemDto.months) * Number(cartItemDto.price);
@@ -123,7 +136,7 @@ export class CartService {
 
 			const dataToUpdate = { total: Number(recalculateResult) };
 
-			await this.updateCartItem(cart_id, dataToUpdate);
+			await this.updateCartItem({ cart_id: cart_id }, dataToUpdate);
 		} else {
 			result = await this.createdCartItem(cartItemDto, subTotalPrice);
 		}
@@ -131,32 +144,34 @@ export class CartService {
 		return result;
 	}
 
-	deleteCartItem(deleteItem: DeleteCartItemDto): Promise<any> {
-		return this.prisma.cartItems
-			.deleteMany({
-				where: {
-					cart_id: Number(deleteItem.cart_id),
-					product_id: Number(deleteItem.product_id)
-				}
-			})
-			.then(async () => {
-				Logger.log('Item successfully deleted', 'DeleteCartItem');
+	async deleteCartItem(id: number): Promise<any> {
+		const dataCartItem = await this.getCartItems({ id: id });
 
-				const dataCartItems = await this.getCartItems({ cart_id: deleteItem.cart_id });
+		if (dataCartItem.data.result.length > 0) {
+			return this.prisma.cartItems
+				.delete({ where: { id: id } })
+				.then(async () => {
+					Logger.log('Item successfully deleted', 'DeleteCartItem');
 
-				const totalValues = [];
-				dataCartItems.data.result.map((cart) => (cart.cart_id == deleteItem.cart_id ? totalValues.push(cart.sub_total) : null));
+					const dataCartItems = await this.getCartItems({ cart_id: dataCartItem.data.result[0].cart_id });
 
-				const recalculateResult = this.recalculateTotalPriceCart(totalValues);
+					const subTotalValues = [];
 
-				const dataToUpdate = { total: Number(recalculateResult) };
+					dataCartItems.data.result.map((cart) => subTotalValues.push(cart.sub_total));
 
-				await this.updateCartItem(deleteItem.cart_id, dataToUpdate);
+					const recalculateResult = this.recalculateTotalPriceCart(subTotalValues);
 
-				return { data: { statusCode: HttpStatus.OK, message: 'Item excluído com sucesso.' } };
-			})
-			.catch((error) => {
-				throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, error.message));
-			});
+					const dataToUpdate = { total: Number(recalculateResult) };
+
+					await this.updateCartItem({ cart_id: dataCartItem.data.result[0].cart_id }, dataToUpdate);
+
+					return { data: { statusCode: HttpStatus.OK, message: 'Item excluído com sucesso.' } };
+				})
+				.catch((error) => {
+					throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, error.message));
+				});
+		} else {
+			return { data: { statusCode: HttpStatus.NOT_FOUND, message: 'Nenhum item encontrado com esse ID.' } };
+		}
 	}
 }
