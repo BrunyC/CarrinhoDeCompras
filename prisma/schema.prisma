@@ -23,7 +23,7 @@ model User {
 
 model Cart {
   id          Int     @default(autoincrement()) @id
-  user        User    @relation(fields: [user_id], references: [id])
+  user        User    @relation(fields: [user_id], references: [id], onDelete: Cascade)
   user_id     Int
   title       String?
   status      Boolean
@@ -31,15 +31,17 @@ model Cart {
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
   cart_items  CartItems[]
+
+  @@unique([user_id, title])
 }
 
 model CartItems {
   id                Int       @default(autoincrement()) @id
-  cart              Cart      @relation(fields: [cart_id], references: [id])
+  cart              Cart      @relation(fields: [cart_id], references: [id], onDelete: Cascade)
   cart_id           Int
-  product           Product   @relation(fields: [product_id], references: [id])
+  product           Product   @relation(fields: [product_id], references: [id], onDelete: Cascade)
   product_id        Int
-  product_price     ProductPrice  @relation(fields: [product_price_id], references: [id])
+  product_price     ProductPrice  @relation(fields: [product_price_id], references: [id], onDelete: Cascade)
   product_price_id  Int
   status            Boolean
   price             Int
@@ -63,7 +65,7 @@ model Product {
 
 model ProductPrice {
   id                Int      @default(autoincrement()) @id
-  product           Product  @relation(fields: [product_id], references: [id])
+  product           Product  @relation(fields: [product_id], references: [id], onDelete: Cascade)
   product_id        Int
   price             Int
   status            Boolean
