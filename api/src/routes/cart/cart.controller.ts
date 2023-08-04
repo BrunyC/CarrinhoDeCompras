@@ -1,9 +1,10 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UseGuards, UsePipes, ValidationPipe } from '@nestjs/common';
 import { CartService } from './cart.service';
 import {
 	ApiBadRequestResponse,
 	ApiBody,
 	ApiCreatedResponse,
+	ApiHeader,
 	ApiInternalServerErrorResponse,
 	ApiNotFoundResponse,
 	ApiOkResponse,
@@ -12,9 +13,16 @@ import {
 } from '@nestjs/swagger';
 import { CartDto, CartItemDto, UpdateCartDto } from '@lib/dto/microservices/cart/index';
 import { ResponseTypeDto } from '@lib/dto/general/index';
+import { AuthGuard } from '@nestjs/passport';
 
 @ApiTags('Cart')
 @Controller('cart')
+@UseGuards(AuthGuard())
+@ApiHeader({
+	name: 'Authorization',
+	description: 'Bearer {{ access_token }}',
+	required: true
+})
 export class CartController {
 	constructor(private readonly cartService: CartService) {}
 

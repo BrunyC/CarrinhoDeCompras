@@ -1,5 +1,6 @@
-GET http://localhost:3000/cart/1
+GET http://localhost:8888/cart/1
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkJydW5vIiwiY3BmIjoiNDE3ODExNjY4MTEifX0sImlhdCI6MTY5MTE2MTQyNSwiZXhwIjoxNjkxMTcyMjI1fQ.4KSjSxCCZGWlmDJj2pu9z7aEtIZv8YNX25qZWYpqf2w
 
 ###
 POST http://localhost:3000/cart

@@ -1,6 +1,6 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiOkResponse, ApiTags } from '@nestjs/swagger';
-import { ResponseHealthCheckDto } from 'lib/src/dto/microservices/healthCheck/index';
+import { ResponseHealthCheckDto } from '@lib/dto/api/healthCheck/index';
 
 @ApiTags('Meli')
 @Controller('Meli/healthCheck')

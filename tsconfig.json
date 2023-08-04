@@ -34,10 +34,13 @@
         "lib/src/dto/microservices/ml-notifications/*"
       ],
       "@lib/dto/microservices/healthCheck/*": [
-        "lib/src/dto/microservices/healthCheck/*"
+        "lib/src/dto/api/healthCheck/*"
       ],
       "@lib/dto/microservices/cart/*": [
         "lib/src/dto/microservices/cart/*"
+      ],
+      "@lib/dto/api/*": [
+        "lib/src/dto/api/*"
       ],
       "@lib/enum/*": [
         "lib/src/enum/*"
