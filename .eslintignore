@@ -1,4 +1,5 @@
 /dist/**
 /coverage/**
 test.js
+/melicontrol-services-docker/**
 !.eslintrc.js

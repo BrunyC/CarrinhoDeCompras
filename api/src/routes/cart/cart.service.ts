@@ -1,6 +1,6 @@
 import { MicroserviceProxy } from '@config/index';
 import { ResponseTypeDto } from '@lib/dto/general/response-type.dto';
-import { CartDto, CartItemDto, UpdateCartDto } from '@lib/dto/microservices/cart/index';
+import { CartDto, CartItemDto } from '@lib/dto/microservices/cart/index';
 import { CartPattern, Microservice } from '@lib/enum/index';
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 
@@ -8,8 +8,8 @@ import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 export class CartService {
 	constructor(@Inject(MicroserviceProxy.MICROSERVICE_PROXY_SERVICE) private publish: MicroserviceProxy) {}
 
-	async getCart(userId: number): Promise<ResponseTypeDto> {
-		const { data } = await this.publish.message(Microservice.CART, CartPattern.GET_CART, userId);
+	async getCart(user: any): Promise<ResponseTypeDto> {
+		const { data } = await this.publish.message(Microservice.CART, CartPattern.GET_CART, user);
 
 		if (data.result.length <= 0)
 			return {
@@ -22,26 +22,30 @@ export class CartService {
 		return data;
 	}
 
-	async createCart(cart: CartDto): Promise<any> {
-		const { data } = await this.publish.message(Microservice.CART, CartPattern.POST_CART, cart);
+	async createCart(user, cart: CartDto): Promise<any> {
+		const { data } = await this.publish.message(Microservice.CART, CartPattern.POST_CART, { cart, user });
 
 		return data;
 	}
 
-	async updateCart(id: number, cart: UpdateCartDto): Promise<any> {
-		const { data } = await this.publish.message(Microservice.CART, CartPattern.UPDATE_CART, { id, cart });
+	async updateCart(putData: any, id: number): Promise<any> {
+		const { data } = await this.publish.message(Microservice.CART, CartPattern.UPDATE_CART, {
+			id,
+			putData: putData.data,
+			user: putData.user
+		});
 
 		return data;
 	}
 
-	async addCartItem(cartItem: CartItemDto): Promise<ResponseTypeDto> {
-		const { data } = await this.publish.message(Microservice.CART, CartPattern.POST_CART_ITEM, cartItem);
+	async addCartItem(user: any, cartItem: CartItemDto): Promise<ResponseTypeDto> {
+		const { data } = await this.publish.message(Microservice.CART, CartPattern.POST_CART_ITEM, { cartItem, user });
 
 		return data;
 	}
 
-	async deleteCartItem(id: number): Promise<ResponseTypeDto> {
-		const { data } = await this.publish.message(Microservice.CART, CartPattern.REMOVE_ITEM_FROM_CART, id);
+	async deleteCartItem(user: any, id: number): Promise<ResponseTypeDto> {
+		const { data } = await this.publish.message(Microservice.CART, CartPattern.REMOVE_ITEM_FROM_CART, { id, user });
 
 		return data;
 	}

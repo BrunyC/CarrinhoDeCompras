@@ -1,40 +1,42 @@
-GET http://localhost:8888/cart/1
+GET http://localhost:8888/cart
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkJydW5vIiwiY3BmIjoiNDE3ODExNjY4MTEifX0sImlhdCI6MTY5MTE2MTQyNSwiZXhwIjoxNjkxMTcyMjI1fQ.4KSjSxCCZGWlmDJj2pu9z7aEtIZv8YNX25qZWYpqf2w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkJydW5vIiwiY3BmIjoiNDE3ODExNjY4MTEifX0sImlhdCI6MTY5MTQxMTQ5NywiZXhwIjoxNjkxNDIyMjk3fQ.u8s_VzRlG61ilTsOF-G7Y96WD9uW3tzacNotLFOUXac
 
 ###
-POST http://localhost:3000/cart
+POST http://localhost:8888/cart
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkJydW5vIiwiY3BmIjoiNDE3ODExNjY4MTEifX0sImlhdCI6MTY5MTQxMTQ5NywiZXhwIjoxNjkxNDIyMjk3fQ.u8s_VzRlG61ilTsOF-G7Y96WD9uW3tzacNotLFOUXac
 
 {
-	"user_id": 2,
-	"title": "cart-teste-2",
+	"title": "cart-teste",
 	"status": true,
 	"default": false
 }
 
 ###
-PUT http://localhost:8888/cart/22
+PUT http://localhost:8888/cart/7
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkJydW5vIiwiY3BmIjoiNDE3ODExNjY4MTEifX0sImlhdCI6MTY5MTQxMTQ5NywiZXhwIjoxNjkxNDIyMjk3fQ.u8s_VzRlG61ilTsOF-G7Y96WD9uW3tzacNotLFOUXac
 
 {
-	"title": "cart-teste-2",
-	"status": true,
-	"default": false
+	"title": "cart-teste-1"
 }
 
 ###
 POST http://localhost:8888/cart/addItem
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkJydW5vIiwiY3BmIjoiNDE3ODExNjY4MTEifX0sImlhdCI6MTY5MTQxMTQ5NywiZXhwIjoxNjkxNDIyMjk3fQ.u8s_VzRlG61ilTsOF-G7Y96WD9uW3tzacNotLFOUXac
 
 {
-	"cart_id": 5,
-	"product_id": 1,
-	"product_price_id": 1,
-	"months": 3,
-	"price": 100,
+	"cart_id": 7,
+	"product_id": 2,
+	"product_price_id": 2,
+	"months": 6,
+	"price": 190,
 	"status": true
 }
+
 ###
-DELETE http://localhost:8888/cart/deleteItem/19
+DELETE http://localhost:8888/cart/deleteItem/51
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkJydW5vIiwiY3BmIjoiNDE3ODExNjY4MTEifX0sImlhdCI6MTY5MTQxMTQ5NywiZXhwIjoxNjkxNDIyMjk3fQ.u8s_VzRlG61ilTsOF-G7Y96WD9uW3tzacNotLFOUXac

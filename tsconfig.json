@@ -42,6 +42,9 @@
       "@lib/dto/api/*": [
         "lib/src/dto/api/*"
       ],
+      "@lib/pipes/*": [
+        "lib/src/pipes/*"
+      ],
       "@lib/enum/*": [
         "lib/src/enum/*"
       ],

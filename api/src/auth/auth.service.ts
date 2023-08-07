@@ -2,7 +2,6 @@ import { Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { ConfigService } from '@nestjs/config';
 import { PrismaService } from '../../../prisma/prisma.service';
-import { JwtPayload } from './jwt/jwt.payload';
 import { UserCredentialsDto } from '@lib/dto/api/user/user-credentials.dto';
 
 @Injectable()
@@ -13,9 +12,9 @@ export class AuthService {
 		return this.prisma.user.findUnique({ where: { username, cpf } });
 	}
 
-	getUserFromToken(token: string): Promise<any> {
-		const id = this.jwtService.decode(token)['userId'];
-		return this.prisma.user.findUnique({ where: { id } });
+	async getUserFromToken(token: string): Promise<any> {
+		const payload = await this.jwtService.decode(token);
+		return payload;
 	}
 
 	async getAccessToken(userCredentialsDto: UserCredentialsDto) {

@@ -9,12 +9,12 @@ export class CartController {
 	constructor(private cartService: CartService) {}
 
 	@MessagePattern(CartPattern.GET_CART)
-	async getCart(@Payload() userId: number, @Ctx() context: RmqContext): Promise<any> {
+	async getCart(@Payload() user: any, @Ctx() context: RmqContext): Promise<any> {
 		const channel = context.getChannelRef();
 		const message = context.getMessage();
 
 		try {
-			const result = await this.cartService.getCart(userId);
+			const result = await this.cartService.getCart(user);
 
 			channel.ack(message);
 
@@ -27,12 +27,12 @@ export class CartController {
 	}
 
 	@MessagePattern(CartPattern.POST_CART)
-	async createCart(@Payload() cart: CartDto, @Ctx() context: RmqContext): Promise<any> {
+	async createCart(@Payload() data: { cart: CartDto; user: any }, @Ctx() context: RmqContext): Promise<any> {
 		const channel = context.getChannelRef();
 		const message = context.getMessage();
 
 		try {
-			const result = await this.cartService.createdCart(cart);
+			const result = await this.cartService.createdCart(data.cart, data.user);
 
 			channel.ack(message);
 
@@ -45,12 +45,11 @@ export class CartController {
 	}
 
 	@MessagePattern(CartPattern.UPDATE_CART)
-	async updateCart(@Payload() data: { id: number; cart: UpdateCartDto }, @Ctx() context: RmqContext): Promise<any> {
+	async updateCart(@Payload() data: { id: number; putData: UpdateCartDto; user: any }, @Ctx() context: RmqContext): Promise<any> {
 		const channel = context.getChannelRef();
 		const message = context.getMessage();
-
 		try {
-			const result = await this.cartService.updateCart(data.id, data.cart);
+			const result = await this.cartService.updateCart(data.id, data.putData, data.user);
 
 			channel.ack(message);
 
@@ -63,12 +62,12 @@ export class CartController {
 	}
 
 	@MessagePattern(CartPattern.POST_CART_ITEM)
-	async addCartItem(@Payload() cartItem: CartItemDto, @Ctx() context: RmqContext): Promise<any> {
+	async addCartItem(@Payload() data: { cartItem: CartItemDto; user: any }, @Ctx() context: RmqContext): Promise<any> {
 		const channel = context.getChannelRef();
 		const message = context.getMessage();
 
 		try {
-			const result = await this.cartService.addCartItem(cartItem);
+			const result = await this.cartService.addCartItem(data.cartItem, data.user);
 
 			channel.ack(message);
 
@@ -81,12 +80,12 @@ export class CartController {
 	}
 
 	@MessagePattern(CartPattern.REMOVE_ITEM_FROM_CART)
-	async deleteCartItem(@Payload() id: number, @Ctx() context: RmqContext): Promise<any> {
+	async deleteCartItem(@Payload() data: { id: number; user: any }, @Ctx() context: RmqContext): Promise<any> {
 		const channel = context.getChannelRef();
 		const message = context.getMessage();
 
 		try {
-			const result = await this.cartService.deleteCartItem(id);
+			const result = await this.cartService.deleteCartItem(data.id, data.user);
 
 			channel.ack(message);
 
