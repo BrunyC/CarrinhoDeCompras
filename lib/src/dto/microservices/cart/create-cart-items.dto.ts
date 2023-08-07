@@ -17,16 +17,6 @@ export class CartItemDto {
 	@IsNumber()
 	product_price_id: number;
 
-	@ApiProperty({ type: 'number' })
-	@IsNotEmpty()
-	@IsNumber()
-	price: number;
-
-	@ApiProperty({ type: 'number' })
-	@IsNotEmpty()
-	@IsNumber()
-	months: number;
-
 	@ApiProperty({ type: 'boolean' })
 	@IsNotEmpty()
 	@IsBoolean()

@@ -1,5 +1,5 @@
 import { HttpStatus, Injectable, Logger } from '@nestjs/common';
-import { CartDto, CartItemDto, UpdateCartDto } from '@lib/dto/microservices/cart/index';
+import { CartDto, CartItemDto } from '@lib/dto/microservices/cart/index';
 import { RpcException } from '@nestjs/microservices';
 import { ExceptionObjectDto } from '@lib/dto/general/index';
 import { PrismaService } from '../../../prisma/prisma.service';
@@ -12,15 +12,23 @@ export class CartService {
 		return this.prisma.cart
 			.findMany({ where: { user_id: user.id }, include: { cart_items: { include: { product: true, product_price: true } } } })
 			.then((result) => {
-				return { data: { statusCode: HttpStatus.OK, result: result } };
+				return { data: { statusCode: HttpStatus.OK, data: result } };
 			})
 			.catch((error) => {
 				throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, error.message));
 			});
 	}
 
-	private findOnly(param: any): Promise<any> {
+	private findOnlyCart(param: any): Promise<any> {
 		return this.prisma.cart.findUnique({ where: param });
+	}
+
+	private findOnlyProduct(param: any): Promise<any> {
+		return this.prisma.product.findUnique({ where: param });
+	}
+
+	private findOnlyPrice(param: any): Promise<any> {
+		return this.prisma.productPrice.findUnique({ where: param });
 	}
 
 	private getCartItems(param: {}) {
@@ -41,9 +49,6 @@ export class CartService {
 			.create({
 				data: {
 					sub_total: subTotalPrice,
-					total: subTotalPrice,
-					months: cartItemDto.months,
-					price: cartItemDto.price,
 					status: cartItemDto.status,
 					cart: {
 						connect: {
@@ -62,38 +67,24 @@ export class CartService {
 					}
 				}
 			})
-			.then(() => {
+			.then((result) => {
 				Logger.log('CartItem successfully created', 'CreateCartItem');
-
-				return { data: { statusCode: HttpStatus.CREATED, result: 'Item inserido com sucesso.' } };
+				return { data: { statusCode: HttpStatus.CREATED, message: 'Item inserido com sucesso!', data: result } };
 			})
 			.catch((error) => {
 				throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, error.message));
 			});
 	}
 
-	private updateCartItem(param, data) {
-		return this.prisma.cartItems
-			.updateMany({
-				where: param,
-				data: data
-			})
-			.then(() => {
-				Logger.log('CartItem successfully updated', 'UpadateCartItem');
-
-				return { data: { statusCode: HttpStatus.CREATED, result: 'Item inserido com sucesso.' } };
-			})
-			.catch((error) => {
-				throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, error.message));
-			});
-	}
-
-	private recalculateTotalPriceCart(values) {
+	private async recalculateTotalPriceCart(cartId, values, user) {
 		let result: Number = 0;
 		for (let i = 0; i < values.length; i++) {
 			result += values[i];
 		}
-		return result;
+
+		const dataToUpdate = { total: Number(result) };
+
+		await this.updateCart(cartId, dataToUpdate, user);
 	}
 
 	createdCart(cart: CartDto, user: any): Promise<any> {
@@ -103,20 +94,21 @@ export class CartService {
 					user_id: user.id,
 					title: cart.title,
 					status: cart.status,
-					default: cart.default
+					default: cart.default,
+					total: 0
 				}
 			})
-			.then(() => {
+			.then((result) => {
 				Logger.log('Cart successfully created', 'CreateCart');
-				return { data: { statusCode: HttpStatus.CREATED, result: 'Carrinho criado com sucesso.' } };
+				return { data: { statusCode: HttpStatus.CREATED, message: 'Carrinho criado com sucesso!', data: result } };
 			})
 			.catch((error) => {
 				throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, error.message));
 			});
 	}
 
-	async updateCart(id: number, cart: UpdateCartDto, user: any): Promise<any> {
-		const userCart = await this.findOnly({ id: id, user_id: user.id });
+	async updateCart(id: number, updateData, user: any): Promise<any> {
+		const userCart = await this.findOnlyCart({ id: id, user_id: user.id });
 
 		if (!userCart) {
 			Logger.log('Cart not updated. User has not permission to update this cart', 'UpdateCart');
@@ -128,11 +120,11 @@ export class CartService {
 			return this.prisma.cart
 				.update({
 					where: { id: id },
-					data: cart
+					data: updateData
 				})
-				.then(() => {
+				.then((result) => {
 					Logger.log('Cart successfully updated', 'UpdateCart');
-					return { data: { statusCode: HttpStatus.OK, result: 'Carrinho atualizado com sucesso.' } };
+					return { data: { statusCode: HttpStatus.OK, message: 'Carrinho atualizado com sucesso!', data: result } };
 				})
 				.catch((error) => {
 					throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, error.message));
@@ -141,11 +133,20 @@ export class CartService {
 	}
 
 	async addCartItem(cartItemDto: CartItemDto, user: any): Promise<any> {
-		const { cart_id } = cartItemDto;
-		const subTotalPrice = Number(cartItemDto.months) * Number(cartItemDto.price);
-		let result = {};
+		const { cart_id, product_id, product_price_id } = cartItemDto;
 
-		const userCart = await this.findOnly({ id: cart_id, user_id: user.id });
+		const product = await this.findOnlyProduct({ id: product_id });
+
+		if (!product) ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, 'Produto não encontrado.');
+
+		const price = await this.findOnlyPrice({ id: product_price_id });
+
+		if (!price) ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, 'Preço do produto não encontrado.');
+
+		const subTotalPrice = Number(product.qty) * Number(price.price);
+		let result: any;
+
+		const userCart = await this.findOnlyCart({ id: cart_id, user_id: user.id });
 
 		if (!userCart) {
 			Logger.log('User has not permission to insert item in this cart', 'AddCartItem');
@@ -162,13 +163,10 @@ export class CartService {
 				const subTotalValues = [subTotalPrice];
 				dataCartItems.data.result.map((cart) => (cart.cart_id == cart_id ? subTotalValues.push(cart.sub_total) : null));
 
-				const recalculateResult = this.recalculateTotalPriceCart(subTotalValues);
-
-				const dataToUpdate = { total: Number(recalculateResult) };
-
-				await this.updateCartItem({ cart_id: cart_id }, dataToUpdate);
+				this.recalculateTotalPriceCart(cart_id, subTotalValues, user);
 			} else {
 				result = await this.createdCartItem(cartItemDto, subTotalPrice);
+				this.recalculateTotalPriceCart(cart_id, [subTotalPrice], user);
 			}
 		}
 		return result;
@@ -178,13 +176,13 @@ export class CartService {
 		const dataCartItem = await this.getCartItems({ id: id });
 
 		if (dataCartItem.data.result.length > 0) {
-			const userCart = await this.findOnly({ id: dataCartItem.data.result[0].cart_id, user_id: user.id });
+			const userCart = await this.findOnlyCart({ id: dataCartItem.data.result[0].cart_id, user_id: user.id });
 
 			if (!userCart) {
 				Logger.log('Item has not deleted. User has not permission to delete this item', 'DeleteCartItem');
 
 				throw new RpcException(
-					ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, 'Você não tem permissão para adicionar item nesse carrinho.')
+					ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, 'Você não tem permissão para excluir item nesse carrinho.')
 				);
 			} else {
 				return this.prisma.cartItems
@@ -198,11 +196,7 @@ export class CartService {
 
 						dataCartItems.data.result.map((cart) => subTotalValues.push(cart.sub_total));
 
-						const recalculateResult = this.recalculateTotalPriceCart(subTotalValues);
-
-						const dataToUpdate = { total: Number(recalculateResult) };
-
-						await this.updateCartItem({ cart_id: dataCartItem.data.result[0].cart_id }, dataToUpdate);
+						this.recalculateTotalPriceCart(dataCartItem.data.result[0].cart_id, subTotalValues, user);
 
 						return { data: { statusCode: HttpStatus.OK, message: 'Item excluído com sucesso.' } };
 					})

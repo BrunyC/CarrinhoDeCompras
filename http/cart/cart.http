@@ -14,7 +14,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZ
 }
 
 ###
-PUT http://localhost:8888/cart/7
+PUT http://localhost:8888/cart/10
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkJydW5vIiwiY3BmIjoiNDE3ODExNjY4MTEifX0sImlhdCI6MTY5MTQxMTQ5NywiZXhwIjoxNjkxNDIyMjk3fQ.u8s_VzRlG61ilTsOF-G7Y96WD9uW3tzacNotLFOUXac
 
@@ -28,15 +28,13 @@ Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkJydW5vIiwiY3BmIjoiNDE3ODExNjY4MTEifX0sImlhdCI6MTY5MTQxMTQ5NywiZXhwIjoxNjkxNDIyMjk3fQ.u8s_VzRlG61ilTsOF-G7Y96WD9uW3tzacNotLFOUXac
 
 {
-	"cart_id": 7,
-	"product_id": 2,
-	"product_price_id": 2,
-	"months": 6,
-	"price": 190,
+	"cart_id": 10,
+	"product_id": 6,
+	"product_price_id": 6,
 	"status": true
 }
 
 ###
-DELETE http://localhost:8888/cart/deleteItem/51
+DELETE http://localhost:8888/cart/deleteItem/67
 Content-Type: application/json
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkJydW5vIiwiY3BmIjoiNDE3ODExNjY4MTEifX0sImlhdCI6MTY5MTQxMTQ5NywiZXhwIjoxNjkxNDIyMjk3fQ.u8s_VzRlG61ilTsOF-G7Y96WD9uW3tzacNotLFOUXac

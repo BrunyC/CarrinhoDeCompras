@@ -26,6 +26,7 @@
 		"start:prod": "node dist/main",
 		"start:api": "nest start api --watch",
 		"start:cart": "nest start cart --watch",
+		"start:ml-notifications": "nest start ml-notifications --watch",
 		"start": "pm2 start config/ecosystem/ecosystem.microservices.config.js",
 		"start:dev": "pm2 start config/ecosystem/ecosystem.microservices.config.js; pm2 logs",
 		"start:docker:ml-api": "pm2-runtime start config/ecosystem/ecosystem.api.config.js",

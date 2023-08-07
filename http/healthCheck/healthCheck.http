@@ -1,3 +1,3 @@
-GET http://localhost:3000/Meli/healthCheck
+GET http://localhost:8888/Meli/healthCheck
 
 ###

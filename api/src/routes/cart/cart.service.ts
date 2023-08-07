@@ -11,7 +11,7 @@ export class CartService {
 	async getCart(user: any): Promise<ResponseTypeDto> {
 		const { data } = await this.publish.message(Microservice.CART, CartPattern.GET_CART, user);
 
-		if (data.result.length <= 0)
+		if (data.data.length <= 0)
 			return {
 				data: {
 					statusCode: HttpStatus.NOT_FOUND,
