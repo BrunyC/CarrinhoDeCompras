@@ -10,6 +10,8 @@ RUN npm i -g @nestjs/cli
 
 COPY . .
 
+RUN npm run prisma:generate
+
 RUN npm run build:ml-api
 
 FROM keymetrics/pm2:16-alpine

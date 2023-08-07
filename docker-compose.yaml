@@ -18,6 +18,9 @@ services:
             RMQ_PORT: 5672
             RMQ_VHOST: ''
             RMQ_QUEUE_DURABLE_CONFIG: 'true'
+            DATABASE_URL: 'mysql://root:main@melicontrol-mysql-8.0:3306/melicontrol'
+            JWT_TOKEN_EXPIRATION_TIME: 3600
+            JWT_SECRET_PHRASE: asdaasdasdasdasdasdasdasdasdasdasdasdasdasdasdasd
         ports:
             - 3000:3000
         networks:

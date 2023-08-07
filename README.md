@@ -130,16 +130,26 @@ npm run test:unit:cov
 
 ## Docker
 
-## To build meli-notification docker image
+## To build meli-api docker image
 
 ```bash
-docker compose build meli-notification
+docker compose build meli-api
 ```
-
 ## To build and execute meli-notification docker
 
 ```bash
-docker compose up -d meli-notification --build
+docker compose up -d meli-api --build
+```
+
+## To build meli-notification docker image
+
+```bash
+docker compose build meli-notifications
+```
+## To build and execute meli-notification docker
+
+```bash
+docker compose up -d meli-notifications --build
 ```
 
 ## To build cart docker image
@@ -147,7 +157,6 @@ docker compose up -d meli-notification --build
 ```bash
 docker compose build meli-cart
 ```
-
 ## To build and execute cart docker image
 
 ```bash
