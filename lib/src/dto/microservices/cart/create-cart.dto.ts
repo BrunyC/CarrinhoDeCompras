@@ -1,19 +1,9 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty, IsOptional, IsString } from 'class-validator';
+import { IsOptional, IsString } from 'class-validator';
 
-export class CartDto {
+export class CreateCartDto {
 	@ApiProperty({ type: 'string' })
 	@IsString()
 	@IsOptional()
 	title: string;
-
-	@ApiProperty({ type: 'boolean' })
-	@IsNotEmpty()
-	@IsBoolean()
-	status: boolean;
-
-	@ApiProperty({ type: 'boolean' })
-	@IsNotEmpty()
-	@IsBoolean()
-	default: boolean;
 }

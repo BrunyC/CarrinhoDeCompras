@@ -1,19 +1,24 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { IsBoolean, IsOptional, IsString } from 'class-validator';
 
-export class UpdateCreateCartDto {
+export class UpdateUserDto {
 	@ApiProperty({ type: 'string' })
-	@IsString()
 	@IsOptional()
-	title: string;
+	@IsString()
+	name: string;
+
+	@ApiProperty({ type: 'string' })
+	@IsOptional()
+	@IsString()
+	lastname: string;
+
+	@ApiProperty({ type: 'string' })
+	@IsOptional()
+	@IsString()
+	cpf: string;
 
 	@ApiProperty({ type: 'boolean' })
 	@IsOptional()
 	@IsBoolean()
 	status: boolean;
-
-	@ApiProperty({ type: 'boolean' })
-	@IsOptional()
-	@IsBoolean()
-	default: boolean;
 }

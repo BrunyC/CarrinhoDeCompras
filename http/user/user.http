@@ -1,0 +1,30 @@
+GET http://localhost:8888/user
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
+
+###
+POST http://localhost:8888/user
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7Im5hbWUiOnsiaWQiOjEsIm5hbWUiOiJhZG1pbiIsImxhc3RuYW1lIjoiYWRtaW4iLCJjcGYiOiIxMTExMTExMTEiLCJ1c2VyX21lbGlfaWQiOjF9fSwiaWF0IjoxNjkzNTAxODc1LCJleHAiOjE2OTM1MTI2NzV9.3r_dLEAcK_7IuYvupotNSrHhF59BJ0XcPw2s0MKhfzw
+
+{
+	"name": "Bruno",
+	"lastname": "Teste",
+	"cpf": "41781166811",
+	"user_meli_id": 2,
+	"status": true
+}
+
+###
+PUT http://localhost:8888/user/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7Im5hbWUiOnsiaWQiOjEsIm5hbWUiOiJhZG1pbiIsImxhc3RuYW1lIjoiYWRtaW4iLCJjcGYiOiIxMTExMTExMTEiLCJ1c2VyX21lbGlfaWQiOjF9fSwiaWF0IjoxNjkzNTAxODc1LCJleHAiOjE2OTM1MTI2NzV9.3r_dLEAcK_7IuYvupotNSrHhF59BJ0XcPw2s0MKhfzw
+
+{
+	"lastname": "adm"
+}
+
+###
+DELETE http://localhost:8888/user/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7Im5hbWUiOnsiaWQiOjEsIm5hbWUiOiJhZG1pbiIsImxhc3RuYW1lIjoiYWRtaW4iLCJjcGYiOiIxMTExMTExMTEiLCJ1c2VyX21lbGlfaWQiOjF9fSwiaWF0IjoxNjkzNTAxODc1LCJleHAiOjE2OTM1MTI2NzV9.3r_dLEAcK_7IuYvupotNSrHhF59BJ0XcPw2s0MKhfzw

@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 datasource db {
   provider = "mysql"
   url      = env("DATABASE_URL")
@@ -12,25 +9,30 @@ generator client {
 }
 
 model User {
-  id       Int    @id @default(autoincrement())
-  username String @unique
-  cpf      String @unique
-  cart     Cart[]
+  id           Int     @id @default(autoincrement())
+  name         String
+  email        String  @unique
+  user_meli_id Int     @unique
+  status       Boolean
+  cart         Cart[]
+  order        Order[]
+
+  @@unique([email, user_meli_id])
 }
 
 model Cart {
-  id         Int         @id @default(autoincrement())
-  user       User        @relation(fields: [user_id], references: [id], onDelete: Cascade)
-  user_id    Int
-  title      String?
-  status     Boolean
-  total      Int
-  default    Boolean
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  cart_items CartItems[]
-
-  @@unique([user_id, title])
+  id          Int          @id @default(autoincrement())
+  user        User         @relation(fields: [user_id], references: [user_meli_id], onDelete: Cascade)
+  user_id     Int
+  title       String?
+  status      Boolean      @default(true)
+  total       Int
+  default     Boolean      @default(false)
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  cart_items  CartItems[]
+  order       Order[]
+  order_items OrderItems[]
 }
 
 model CartItems {
@@ -50,21 +52,69 @@ model CartItems {
 model Product {
   id            Int            @id @default(autoincrement())
   title         String
-  status        Boolean
+  description   String?
   qty           Int
-  product_price ProductPrice[]
+  status        Boolean
   createdAt     DateTime       @default(now())
   updatedAt     DateTime       @updatedAt
+  product_price ProductPrice[]
   cart_items    CartItems[]
+  order_items   OrderItems[]
 }
 
 model ProductPrice {
-  id         Int         @id @default(autoincrement())
-  product    Product     @relation(fields: [product_id], references: [id], onDelete: Cascade)
-  product_id Int
-  price      Int
-  status     Boolean
-  createdAt  DateTime    @default(now())
-  updatedAt  DateTime    @updatedAt
-  cart_items CartItems[]
+  id          Int          @id @default(autoincrement())
+  product     Product      @relation(fields: [product_id], references: [id], onDelete: Cascade)
+  product_id  Int
+  price       Int
+  status      Boolean
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @updatedAt
+  cart_items  CartItems[]
+  order_items OrderItems[]
+
+  @@unique([product_id, price])
+}
+
+model Order {
+  id             Int      @id @default(autoincrement())
+  cart           Cart     @relation(fields: [cart_id], references: [id])
+  cart_id        Int
+  cart_data      Json
+  user           User     @relation(fields: [user_id], references: [user_meli_id])
+  user_id        Int
+  user_data      Json
+  status         Json
+  payment_status Boolean  @default(false)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
+
+  @@unique([cart_id, user_id])
+}
+
+model OrderItems {
+  id                  Int          @id @default(autoincrement())
+  cart                Cart         @relation(fields: [cart_id], references: [id])
+  cart_id             Int
+  cart_data           Json
+  product             Product      @relation(fields: [product_id], references: [id])
+  product_id          Int
+  product_data        Json
+  product_price       ProductPrice @relation(fields: [product_price_id], references: [id])
+  product_price_id    Int
+  product_price_data  Json
+  cart_item_status    Boolean
+  cart_item_sub_total Int
+  createdAt           DateTime     @default(now())
+  updatedAt           DateTime     @updatedAt
+}
+
+model Payments {
+  id              Int      @id @default(autoincrement())
+  order_id        Int
+  value           Int
+  transaction_id  Int
+  status          Json
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
 }

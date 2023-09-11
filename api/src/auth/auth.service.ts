@@ -8,8 +8,8 @@ import { UserCredentialsDto } from '@lib/dto/api/user/user-credentials.dto';
 export class AuthService {
 	constructor(protected configService: ConfigService, private jwtService: JwtService, private prisma: PrismaService) {}
 
-	validateUser(username: string, cpf: string): Promise<any> {
-		return this.prisma.user.findUnique({ where: { username, cpf } });
+	validateUser(name: string, email: string): Promise<any> {
+		return this.prisma.user.findUnique({ where: { name, email } });
 	}
 
 	async getUserFromToken(token: string): Promise<any> {
@@ -18,13 +18,13 @@ export class AuthService {
 	}
 
 	async getAccessToken(userCredentialsDto: UserCredentialsDto) {
-		const username = await this.validateUser(userCredentialsDto.username, userCredentialsDto.cpf);
+		const name = await this.validateUser(userCredentialsDto.name, userCredentialsDto.email);
 
-		if (!username) {
+		if (!name) {
 			throw new UnauthorizedException('Invalid credentials.');
 		}
 
-		const payload = { username };
+		const payload = { name };
 		const accessToken = this.jwtService.sign({ payload });
 
 		return {

@@ -1,40 +1,43 @@
 GET http://localhost:8888/cart
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkJydW5vIiwiY3BmIjoiNDE3ODExNjY4MTEifX0sImlhdCI6MTY5MTQxMTQ5NywiZXhwIjoxNjkxNDIyMjk3fQ.u8s_VzRlG61ilTsOF-G7Y96WD9uW3tzacNotLFOUXac
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
 
 ###
 POST http://localhost:8888/cart
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkJydW5vIiwiY3BmIjoiNDE3ODExNjY4MTEifX0sImlhdCI6MTY5MTQxMTQ5NywiZXhwIjoxNjkxNDIyMjk3fQ.u8s_VzRlG61ilTsOF-G7Y96WD9uW3tzacNotLFOUXac
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
 
 {
-	"title": "cart-teste",
-	"status": true,
-	"default": false
+	"title": "cart-teste-2"
 }
 
 ###
-PUT http://localhost:8888/cart/10
+PUT http://localhost:8888/cart/1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkJydW5vIiwiY3BmIjoiNDE3ODExNjY4MTEifX0sImlhdCI6MTY5MTQxMTQ5NywiZXhwIjoxNjkxNDIyMjk3fQ.u8s_VzRlG61ilTsOF-G7Y96WD9uW3tzacNotLFOUXac
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
 
 {
-	"title": "cart-teste-1"
+	"title": "cart-teste-2"
 }
+
+###
+PUT http://localhost:8888/cart/setDefault/1
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
 
 ###
 POST http://localhost:8888/cart/addItem
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkJydW5vIiwiY3BmIjoiNDE3ODExNjY4MTEifX0sImlhdCI6MTY5MTQxMTQ5NywiZXhwIjoxNjkxNDIyMjk3fQ.u8s_VzRlG61ilTsOF-G7Y96WD9uW3tzacNotLFOUXac
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
 
 {
-	"cart_id": 10,
-	"product_id": 6,
-	"product_price_id": 6,
+	"cart_id": 2,
+	"product_id": 3,
+	"product_price_id": 3,
 	"status": true
 }
 
 ###
-DELETE http://localhost:8888/cart/deleteItem/67
+DELETE http://localhost:8888/cart/deleteItem/2
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7InVzZXJuYW1lIjp7ImlkIjoxLCJ1c2VybmFtZSI6IkJydW5vIiwiY3BmIjoiNDE3ODExNjY4MTEifX0sImlhdCI6MTY5MTQxMTQ5NywiZXhwIjoxNjkxNDIyMjk3fQ.u8s_VzRlG61ilTsOF-G7Y96WD9uW3tzacNotLFOUXac
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw

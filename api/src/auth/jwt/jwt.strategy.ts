@@ -9,13 +9,13 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
 	constructor(protected configService: ConfigService, private authService: AuthService) {
 		super({
 			jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-			secretOrKey: configService.get<string>('JWT_SECRET_PHRASE')
+			secretOrKey: configService.get<string>('MELI_JWT_SECRET_PHRASE')
 		});
 	}
 
 	async validate(payload) {
-		const { username, cpf } = payload.payload.username;
-		const user = await this.authService.validateUser(username, cpf);
+		const { name, cpf } = payload.payload.name;
+		const user = await this.authService.validateUser(name, cpf);
 
 		if (!user) {
 			throw new UnauthorizedException();

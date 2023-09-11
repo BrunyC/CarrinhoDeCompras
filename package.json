@@ -13,10 +13,13 @@
 		"stop:services": "cd melicontrol-services-docker && docker-compose stop && cd ..",
 		"start:service:rabbitmq": "cd melicontrol-services-docker && docker start melicontrol-rabbitmq-3.8.3 && cd ..",
 		"stop:service:rabbitmq": "cd melicontrol-services-docker && docker stop melicontrol-rabbitmq-3.8.3 && cd ..",
-		"build:microservices": "nest build api; nest build ml-notifications; nest build cart",
+		"build:microservices": "nest build api; nest build cart; nest build checkout; nest build product; nest build product_price; nest build user",
 		"build:ml-api": "nest build api",
-		"build:ml-notifications": "nest build ml-notifications",
 		"build:ml-cart": "nest build cart",
+		"build:ml-checkout": "nest build checkout",
+		"build:ml-product": "nest build product",
+		"build:ml-product-price": "nest build product-price",
+		"build:ml-user": "nest build user",
 		"build:docker-compose": "docker compose build --no-cache",
 		"build:docker": "docker build --no-cache --force-rm .",
 		"prisma:migrate": "npx prisma migrate dev --name meli",
@@ -26,16 +29,14 @@
 		"start:prod": "node dist/main",
 		"start:api": "nest start api --watch",
 		"start:cart": "nest start cart --watch",
-		"start:ml-notifications": "nest start ml-notifications --watch",
+		"start:checkout": "nest start checkout --watch",
+		"start:user": "nest start user --watch",
+		"start:product": "nest start product --watch",
+		"start:product-price": "nest start product_price --watch",
 		"start": "pm2 start config/ecosystem/ecosystem.microservices.config.js",
 		"start:dev": "pm2 start config/ecosystem/ecosystem.microservices.config.js; pm2 logs",
 		"start:docker:ml-api": "pm2-runtime start config/ecosystem/ecosystem.api.config.js",
-		"start:docker:ml-notifications": "pm2-runtime start config/ecosystem/ecosystem.ml-notifications.config.js",
-		"start:docker:ml-cart": "pm2-runtime start config/ecosystem/ecosystem.cart.config.js",
-		"test": "jest",
-		"test:watch": "jest --watch",
-		"test:unit:cov": "jest --coverage --runInBand --detectOpenHandles --no-cache --config ./jest.config.ts",
-		"test:debug": "node --inspect-brk -r tsconfig-paths/register -r ts-node/register node_modules/.bin/jest --runInBand"
+		"start:docker:ml-cart": "pm2-runtime start config/ecosystem/ecosystem.cart.config.js"
 	},
 	"dependencies": {
 		"@nestjs/common": "^9.0.0",
@@ -54,8 +55,7 @@
 		"helmet": "^7.0.0",
 		"passport": "^0.6.0",
 		"passport-jwt": "^4.0.1",
-		"reflect-metadata": "^0.1.13",
-		"uuid": "^9.0.0"
+		"reflect-metadata": "^0.1.13"
 	},
 	"devDependencies": {
 		"@nestjs/cli": "^9.0.0",
@@ -81,15 +81,21 @@
 		"typescript": "^4.7.4"
 	},
 	"_moduleAliases": {
-		"@lib/dto/microservice/ml-notifications": "lib/src/dto/microservices/ml-notifications",
+		"@lib/dto/microservice/product": "lib/src/dto/microservices/product",
+		"@lib/dto/microservice/product_price": "lib/src/dto/microservices/product_price",
+		"@lib/dto/microservice/user": "lib/src/dto/microservices/user",
 		"@lib/dto/microservice/cart": "lib/src/dto/microservices/cart",
+		"@lib/dto/microservice/checkout": "lib/src/dto/microservices/checkout",
 		"@lib/enum": "lib/src/enum",
 		"@lib/type": "lib/src/type",
 		"@lib": "lib/src",
 		"@config": "config/services",
 		"@api": "api/src",
-		"@notifications": "microservices/ml-notifications",
-		"@cart": "microservices/cart"
+		"@product": "microservices/product",
+		"@product_price": "microservices/product_price",
+		"@user": "microservices/user",
+		"@cart": "microservices/cart",
+		"@checkout": "microservices/checkout"
 	},
 	"_moduleDirectories": [
 		"node_modules"

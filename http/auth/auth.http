@@ -2,6 +2,6 @@ POST http://localhost:8888/auth/getaccesstoken
 Content-Type: application/json
 
 {
-    "username": "Bruno",
-    "cpf": "41781166811"
+    "name": "Bruno",
+    "email": "teste@teste.com"
 }

@@ -1,6 +1,6 @@
 import { MicroserviceProxy } from '@config/index';
 import { ResponseTypeDto } from '@lib/dto/general/response-type.dto';
-import { CartDto, CartItemDto } from '@lib/dto/microservices/cart/index';
+import { CreateCartDto, CartItemDto } from '@lib/dto/microservices/cart/index';
 import { CartPattern, Microservice } from '@lib/enum/index';
 import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 
@@ -8,10 +8,10 @@ import { HttpStatus, Inject, Injectable } from '@nestjs/common';
 export class CartService {
 	constructor(@Inject(MicroserviceProxy.MICROSERVICE_PROXY_SERVICE) private publish: MicroserviceProxy) {}
 
-	async getCart(user: any): Promise<ResponseTypeDto> {
-		const { data } = await this.publish.message(Microservice.CART, CartPattern.GET_CART, user);
+	async getCart(headers): Promise<ResponseTypeDto> {
+		const { data } = await this.publish.message(Microservice.CART, CartPattern.GET_CART, { headers: headers });
 
-		if (data.data.length <= 0)
+		if (data.data.length === 0)
 			return {
 				data: {
 					statusCode: HttpStatus.NOT_FOUND,
@@ -22,30 +22,32 @@ export class CartService {
 		return data;
 	}
 
-	async createCart(user, cart: CartDto): Promise<any> {
-		const { data } = await this.publish.message(Microservice.CART, CartPattern.POST_CART, { cart, user });
+	async createCart(cart: CreateCartDto, headers): Promise<any> {
+		const { data } = await this.publish.message(Microservice.CART, CartPattern.POST_CART, { cart, headers });
 
 		return data;
 	}
 
-	async updateCart(putData: any, id: number): Promise<any> {
-		const { data } = await this.publish.message(Microservice.CART, CartPattern.UPDATE_CART, {
-			id,
-			putData: putData.data,
-			user: putData.user
-		});
+	async updateCart(putData: any, id: number, headers): Promise<any> {
+		const { data } = await this.publish.message(Microservice.CART, CartPattern.UPDATE_CART, { id, putData, headers });
 
 		return data;
 	}
 
-	async addCartItem(user: any, cartItem: CartItemDto): Promise<ResponseTypeDto> {
-		const { data } = await this.publish.message(Microservice.CART, CartPattern.POST_CART_ITEM, { cartItem, user });
+	async setCartDefault(id: number, headers): Promise<any> {
+		const { data } = await this.publish.message(Microservice.CART, CartPattern.SET_CART_DEFAULT, { id, headers });
 
 		return data;
 	}
 
-	async deleteCartItem(user: any, id: number): Promise<ResponseTypeDto> {
-		const { data } = await this.publish.message(Microservice.CART, CartPattern.REMOVE_ITEM_FROM_CART, { id, user });
+	async addCartItem(cartItem: CartItemDto, headers): Promise<ResponseTypeDto> {
+		const { data } = await this.publish.message(Microservice.CART, CartPattern.POST_CART_ITEM, { cartItem, headers });
+
+		return data;
+	}
+
+	async deleteCartItem(id: number, headers): Promise<ResponseTypeDto> {
+		const { data } = await this.publish.message(Microservice.CART, CartPattern.REMOVE_ITEM_FROM_CART, { id, headers });
 
 		return data;
 	}
