@@ -1,0 +1,28 @@
+GET http://localhost:8888/product-price
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
+
+###
+POST http://localhost:8888/product-price
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
+
+{
+	"product_id": 5,
+	"price": 500,
+	"status": true
+}
+
+###
+PUT http://localhost:8888/product-price/6
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
+
+{
+	"price": 510
+}
+
+###
+DELETE http://localhost:8888/product-price/6
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw

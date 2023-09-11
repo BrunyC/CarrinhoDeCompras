@@ -1,1 +1,1 @@
-export * from './get-user-id.pipe';
+export * from './get-user-data.pipe';

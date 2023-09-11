@@ -30,8 +30,8 @@ services:
     volumes:
       - ./services/rabbitmq/data:/var/lib/rabbitmq/
     environment:
-      - RABBITMQ_DEFAULT_USER=main
-      - RABBITMQ_DEFAULT_PASS=main
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
     ports:
       - '5672:5672'
       - '15672:15672'
