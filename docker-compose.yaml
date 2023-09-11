@@ -26,21 +26,6 @@ services:
         networks:
             - internal
 
-    meli-notifications:
-        container_name: meli-notifications
-        build:
-            context: .
-            dockerfile: ./melicontrol-microservices-docker/meli-notification.Dockerfile
-        environment:
-            RMQ_HOST: melicontrol-rabbitmq-3.8.3
-            RMQ_USERNAME: main
-            RMQ_PASSWORD: main
-            RMQ_PORT: 5672
-            RMQ_VHOST: ''
-            RMQ_QUEUE_DURABLE_CONFIG: 'true'
-        networks:
-            - internal
-
     meli-cart:
         container_name: meli-cart
         build:
@@ -61,17 +46,3 @@ services:
             DATABASE_URL: 'mysql://root:main@melicontrol-mysql-8.0:3306/melicontrol'
         networks:
             - internal
-            
-    # meli-notification:
-    #   image: melicontainerregistry.azurecr.io/melicontrolmicroservices-meli-notification:latest
-    #   container_name: meli-notification
-    #   environment:
-    #     RMQ_HOST: mcrabbitmq04.eastus.cloudapp.azure.com
-    #     RMQ_USERNAME: azure
-    #     RMQ_PASSWORD: MLFacil2017
-    #     RMQ_PORT: 5672
-    #     RMQ_VHOST: ''
-    #     RMQ_QUEUE_DURABLE_CONFIG: "true"
-    #     LOG_SYNC: 1
-    #   networks:
-    #     - internal

@@ -8,73 +8,24 @@ import { RabbitMQConfig } from './rabbitmq.config';
 	imports: [],
 	providers: [
 		{
-			provide: Microservice.ITEMS,
+			provide: Microservice.PRODUCT,
 			useFactory: (rabbitMqConfig: RabbitMQConfig) => {
 				rabbitMqConfig = new RabbitMQConfig();
-				return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.ITEMS));
+				return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.PRODUCT));
 			}
 		},
 		{
-			provide: Microservice.ITEMS2,
+			provide: Microservice.PRODUCT_PRICE,
 			useFactory: (rabbitMqConfig: RabbitMQConfig) => {
 				rabbitMqConfig = new RabbitMQConfig();
-				return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.ITEMS2));
+				return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.PRODUCT_PRICE));
 			}
 		},
 		{
-			provide: Microservice.LOG_SYNC,
+			provide: Microservice.USER,
 			useFactory: (rabbitMqConfig: RabbitMQConfig) => {
 				rabbitMqConfig = new RabbitMQConfig();
-				return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.LOG_SYNC));
-			}
-		},
-		{
-			provide: Microservice.MESSAGES,
-			useFactory: (rabbitMqConfig: RabbitMQConfig) => {
-				rabbitMqConfig = new RabbitMQConfig();
-				return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.MESSAGES));
-			}
-		},
-		{
-			provide: Microservice.ORDERS_V2,
-			useFactory: (rabbitMqConfig: RabbitMQConfig) => {
-				rabbitMqConfig = new RabbitMQConfig();
-				return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.ORDERS_V2));
-			}
-		},
-		{
-			provide: Microservice.OTHERS,
-			useFactory: (rabbitMqConfig: RabbitMQConfig) => {
-				rabbitMqConfig = new RabbitMQConfig();
-				return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.OTHERS));
-			}
-		},
-		{
-			provide: Microservice.PAYMENTS,
-			useFactory: (rabbitMqConfig: RabbitMQConfig) => {
-				rabbitMqConfig = new RabbitMQConfig();
-				return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.PAYMENTS));
-			}
-		},
-		{
-			provide: Microservice.QUESTIONS,
-			useFactory: (rabbitMqConfig: RabbitMQConfig) => {
-				rabbitMqConfig = new RabbitMQConfig();
-				return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.QUESTIONS));
-			}
-		},
-		{
-			provide: Microservice.SHIPMENTS,
-			useFactory: (rabbitMqConfig: RabbitMQConfig) => {
-				rabbitMqConfig = new RabbitMQConfig();
-				return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.SHIPMENTS));
-			}
-		},
-		{
-			provide: Microservice.TEST,
-			useFactory: (rabbitMqConfig: RabbitMQConfig) => {
-				rabbitMqConfig = new RabbitMQConfig();
-				return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.TEST));
+				return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.USER));
 			}
 		},
 		{
@@ -82,6 +33,13 @@ import { RabbitMQConfig } from './rabbitmq.config';
 			useFactory: (rabbitMqConfig: RabbitMQConfig) => {
 				rabbitMqConfig = new RabbitMQConfig();
 				return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.CART));
+			}
+		},
+		{
+			provide: Microservice.CHECKOUT,
+			useFactory: (rabbitMqConfig: RabbitMQConfig) => {
+				rabbitMqConfig = new RabbitMQConfig();
+				return ClientProxyFactory.create(rabbitMqConfig.getOptions(Microservice.CHECKOUT));
 			}
 		},
 		{

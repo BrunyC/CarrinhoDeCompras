@@ -30,17 +30,23 @@
       "@lib/dto/general/*": [
         "lib/src/dto/general/*"
       ],
-      "@lib/dto/microservices/ml-notifications/*": [
-        "lib/src/dto/microservices/ml-notifications/*"
+      "@lib/dto/api/*": [
+        "lib/src/dto/api/*"
       ],
-      "@lib/dto/microservices/healthCheck/*": [
-        "lib/src/dto/api/healthCheck/*"
+      "@lib/dto/microservices/user/*": [
+        "lib/src/dto/microservices/user/*"
+      ],
+      "@lib/dto/microservices/product/*": [
+        "lib/src/dto/microservices/product/*"
+      ],
+       "@lib/dto/microservices/product_price/*": [
+        "lib/src/dto/microservices/product_price/*"
       ],
       "@lib/dto/microservices/cart/*": [
         "lib/src/dto/microservices/cart/*"
       ],
-      "@lib/dto/api/*": [
-        "lib/src/dto/api/*"
+      "@lib/dto/microservices/checkout/*": [
+        "lib/src/dto/microservices/checkout/*"
       ],
       "@lib/pipes/*": [
         "lib/src/pipes/*"
@@ -51,11 +57,20 @@
       "@lib/type/*": [
         "lib/src/type/*"
       ],
-      "@ml-notifications/*": [
-        "microservices/ml-notifications/src/*"
+      "@product/*": [
+        "microservices/product/src/*"
+      ],
+      "@product_price/*": [
+        "microservices/product_price/src/*"
+      ],
+      "@user/*": [
+        "microservices/user/src/*"
       ],
       "@cart/*": [
         "microservices/cart/src/*"
+      ],
+      "@checkout/*": [
+        "microservices/checkout/src/*"
       ],
     }
   },

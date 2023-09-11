@@ -120,36 +120,12 @@ nest start [Microservice] --watch
 npm run lint:format
 ```
 
-## Tests
-
-## Run Coverage Tests
-
-```bash
-npm run test:unit:cov
-```
-
 ## Docker
 
 ## To build meli-api docker image
 
 ```bash
 docker compose build meli-api
-```
-## To build and execute meli-notification docker
-
-```bash
-docker compose up -d meli-api --build
-```
-
-## To build meli-notification docker image
-
-```bash
-docker compose build meli-notifications
-```
-## To build and execute meli-notification docker
-
-```bash
-docker compose up -d meli-notifications --build
 ```
 
 ## To build cart docker image

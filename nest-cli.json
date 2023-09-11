@@ -17,13 +17,31 @@
 				"tsConfigPath": "api/tsconfig.app.json"
 			}
 		},
-		"ml-notifications": {
+		"product": {
 			"type": "application",
-			"root": "microservices/ml-notifications",
+			"root": "microservices/product",
 			"entryFile": "main",
-			"sourceRoot": "microservices/ml-notifications/src",
+			"sourceRoot": "microservices/product/src",
 			"compilerOptions": {
-				"tsConfigPath": "microservices/ml-notifications/tsconfig.app.json"
+				"tsConfigPath": "microservices/product/tsconfig.app.json"
+			}
+		},
+		"product_price": {
+			"type": "application",
+			"root": "microservices/product_price",
+			"entryFile": "main",
+			"sourceRoot": "microservices/product_price/src",
+			"compilerOptions": {
+				"tsConfigPath": "microservices/product_price/tsconfig.app.json"
+			}
+		},
+		"user": {
+			"type": "application",
+			"root": "microservices/user",
+			"entryFile": "main",
+			"sourceRoot": "microservices/user/src",
+			"compilerOptions": {
+				"tsConfigPath": "microservices/user/tsconfig.app.json"
 			}
 		},
 		"cart": {
@@ -33,6 +51,15 @@
 			"sourceRoot": "microservices/cart/src",
 			"compilerOptions": {
 				"tsConfigPath": "microservices/cart/tsconfig.app.json"
+			}
+		},
+		"checkout": {
+			"type": "application",
+			"root": "microservices/checkout",
+			"entryFile": "main",
+			"sourceRoot": "microservices/checkout/src",
+			"compilerOptions": {
+				"tsConfigPath": "microservices/checkout/tsconfig.app.json"
 			}
 		}
 	}
