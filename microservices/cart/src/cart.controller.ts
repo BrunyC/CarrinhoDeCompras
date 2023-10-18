@@ -67,7 +67,10 @@ export class CartController {
 
 	@UsePipes(GetUserPipe)
 	@MessagePattern(CartPattern.SET_CART_DEFAULT)
-	async setCartDefault(@Payload() { data: { userData, value } }: { data: { userData; value } }, @Ctx() context: RmqContext): Promise<any> {
+	async setCartDefault(
+		@Payload() { data: { userData, value } }: { data: { userData; value } },
+		@Ctx() context: RmqContext
+	): Promise<any> {
 		const channel = context.getChannelRef();
 		const message = context.getMessage();
 

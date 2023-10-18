@@ -1,14 +1,8 @@
 import { OrderStatus } from '@lib/enum/dto.enum';
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsEnum, IsNumber, IsOptional } from 'class-validator';
+import { IsBoolean, IsEnum, IsOptional } from 'class-validator';
 
 export class UpdateOrderDto {
-
-	@ApiProperty({ type: 'number' })
-	@IsOptional()
-	@IsNumber()
-	cart_id: number;
-
 	@ApiProperty({ type: 'boolean' })
 	@IsOptional()
 	@IsBoolean()

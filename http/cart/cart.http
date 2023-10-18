@@ -1,43 +1,43 @@
-GET http://localhost:8888/cart
+GET http://localhost:3000/cart
 Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
 
 ###
-POST http://localhost:8888/cart
+POST http://localhost:3000/cart
 Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
 
 {
-	"title": "cart-teste-2"
+	"title": "cart-teste"
 }
 
 ###
-PUT http://localhost:8888/cart/1
+PUT http://localhost:3000/cart/1
 Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
 
 {
-	"title": "cart-teste-2"
+	"title": "cart-teste"
 }
 
 ###
-PUT http://localhost:8888/cart/setDefault/1
+PUT http://localhost:3000/cart/setDefault/1
 Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
 
 ###
-POST http://localhost:8888/cart/addItem
+POST http://localhost:3000/cart/addItem
 Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
 
 {
-	"cart_id": 2,
-	"product_id": 3,
-	"product_price_id": 3,
+	"cart_id": 1,
+	"product_id": 2,
+	"product_price_id": 30,
 	"status": true
 }
 
 ###
-DELETE http://localhost:8888/cart/deleteItem/2
+DELETE http://localhost:3000/cart/deleteItem/2
 Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw

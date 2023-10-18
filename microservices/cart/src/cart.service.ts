@@ -20,7 +20,11 @@ export class CartService {
 		return this.prisma.cart.findUnique({ where: param });
 	}
 
-	private getCartItems(param: {}) {
+	getOnlyCartItem(param: any): Promise<any> {
+		return this.prisma.cartItems.findUnique({ where: param });
+	}
+
+	getCartItems(param: {}) {
 		return this.prisma.cartItems
 			.findMany({
 				where: param
@@ -82,7 +86,7 @@ export class CartService {
 	}
 
 	async getCart(user: any): Promise<any> {
-			return this.prisma.cart
+		return this.prisma.cart
 			.findMany({ where: { user_id: user.sub }, include: { cart_items: { include: { product: true, product_price: true } } } })
 			.then((result) => {
 				return { data: { statusCode: HttpStatus.OK, data: result } };
@@ -228,9 +232,7 @@ export class CartService {
 			if (!userCart) {
 				Logger.log('This item cannot be excluded', 'DeleteCartItem');
 
-				throw new RpcException(
-					ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, 'Item não pode ser excluído.')
-				);
+				throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, 'Item não pode ser excluído.'));
 			} else {
 				return this.prisma.cartItems
 					.delete({ where: { id: id } })
@@ -248,7 +250,9 @@ export class CartService {
 						return { data: { statusCode: HttpStatus.OK, message: 'Item excluído com sucesso.' } };
 					})
 					.catch((error) => {
-						throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, error.meta ? error.meta : error.message));
+						throw new RpcException(
+							ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, error.meta ? error.meta : error.message)
+						);
 					});
 			}
 		} else {

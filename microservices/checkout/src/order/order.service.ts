@@ -37,7 +37,9 @@ export class OrderService {
 		}
 
 		if (user.sub !== cartData.user_id) {
-			throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, 'Usuário não tem permissão para criar um pedido desse carrinho!'));
+			throw new RpcException(
+				ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, 'Usuário não tem permissão para criar um pedido desse carrinho!')
+			);
 		}
 
 		const userData = await this.userService.getOnlyUser({ user_meli_id: user.sub });
@@ -63,13 +65,8 @@ export class OrderService {
 	}
 
 	async updateOrder(id: number, updateData: UpdateOrderDto, user: any): Promise<any> {
-		if(updateData.cart_id) {
-			const cartData = await this.cartService.getOnlyCart({ id: updateData.cart_id });
-			Object.assign(updateData, { cart_data: cartData });
-		}
-
 		const order = await this.getOnlyOrder({ id: id });
-		if(!order) {
+		if (!order) {
 			throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, 'Pedido não encontrado!'));
 		}
 
@@ -97,7 +94,7 @@ export class OrderService {
 	async deleteOrder(id: number, user: any): Promise<any> {
 		const order = await this.getOnlyOrder({ id: id, payment_status: false });
 
-		if(!order) {
+		if (!order) {
 			throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, 'Pedido não encontrado ou não pode ser excluído!'));
 		}
 

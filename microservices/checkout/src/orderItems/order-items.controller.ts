@@ -2,7 +2,6 @@ import { Controller, UsePipes } from '@nestjs/common';
 import { Payload, MessagePattern, Ctx, RmqContext } from '@nestjs/microservices';
 import { CheckoutPattern } from '@lib/enum/microservices.pattern.enum';
 import { OrderItemsService } from './order-items.service';
-import { CreateOrderItemDto, UpdateOrderItemsDto } from '@lib/dto/microservices/checkout/index';
 import { GetUserPipe } from '@lib/pipes/index';
 
 @Controller()
@@ -38,7 +37,7 @@ export class OrderItemsController {
 		const message = context.getMessage();
 
 		try {
-			const result = await this.orderItemsService.createdOrderItems(value.order, userData);
+			const result = await this.orderItemsService.createdOrderItems(value.orderItem, userData);
 
 			channel.ack(message);
 

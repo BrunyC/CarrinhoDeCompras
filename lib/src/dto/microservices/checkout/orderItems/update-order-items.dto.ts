@@ -1,24 +1,24 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsBoolean, IsNotEmpty, IsNumber } from 'class-validator';
+import { IsBoolean, IsNumber, IsOptional } from 'class-validator';
 
 export class UpdateOrderItemsDto {
 	@ApiProperty({ type: 'number' })
-	@IsNotEmpty()
+	@IsOptional()
 	@IsNumber()
 	product_id: number;
 
 	@ApiProperty({ type: 'number' })
-	@IsNotEmpty()
+	@IsOptional()
 	@IsNumber()
 	product_price_id: number;
 
 	@ApiProperty({ type: 'number' })
-	@IsNotEmpty()
+	@IsOptional()
 	@IsNumber()
-	sub_total: number;
+	cart_item_sub_total: number;
 
 	@ApiProperty({ type: 'boolean' })
-	@IsNotEmpty()
+	@IsOptional()
 	@IsBoolean()
-	status: boolean;
+	cart_item_status: boolean;
 }
