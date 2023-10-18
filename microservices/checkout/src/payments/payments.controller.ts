@@ -29,49 +29,15 @@ export class PaymentController {
 
 	@UsePipes(GetUserPipe)
 	@MessagePattern(CheckoutPattern.POST_PAYMENTS)
-	async createdPayment(@Payload() { data: { userData, value } }: { data: { userData; value } }, @Ctx() context: RmqContext): Promise<any> {
+	async createdPayment(
+		@Payload() { data: { userData, value } }: { data: { userData; value } },
+		@Ctx() context: RmqContext
+	): Promise<any> {
 		const channel = context.getChannelRef();
 		const message = context.getMessage();
 
 		try {
 			const result = await this.paymentService.createdPayment(userData, value.payment);
-
-			channel.ack(message);
-
-			return result;
-		} catch (error) {
-			channel.ack(message);
-
-			throw error;
-		}
-	}
-
-	@UsePipes(GetUserPipe)
-	@MessagePattern(CheckoutPattern.UPDATE_PAYMENTS)
-	async updatePayment(@Payload() { data: { userData, value } }: { data: { userData; value } }, @Ctx() context: RmqContext): Promise<any> {
-		const channel = context.getChannelRef();
-		const message = context.getMessage();
-		try {
-			const result = await this.paymentService.updatePayment(value.id, value.putData, userData);
-
-			channel.ack(message);
-
-			return result;
-		} catch (error) {
-			channel.ack(message);
-
-			throw error;
-		}
-	}
-
-	@UsePipes(GetUserPipe)
-	@MessagePattern(CheckoutPattern.REMOVE_PAYMENTS)
-	async deletePayment(@Payload() { data: { userData, value } }: { data: { userData; value } }, @Ctx() context: RmqContext): Promise<any> {
-		const channel = context.getChannelRef();
-		const message = context.getMessage();
-
-		try {
-			const result = await this.paymentService.deletePayment(value.id, userData);
 
 			channel.ack(message);
 

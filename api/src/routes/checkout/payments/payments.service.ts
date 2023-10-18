@@ -27,20 +27,4 @@ export class PaymentsService {
 
 		return data;
 	}
-
-	async updatePayment(putData: any, id: number, headers): Promise<any> {
-		const { data } = await this.publish.message(Microservice.CHECKOUT, CheckoutPattern.UPDATE_PAYMENTS, {
-			id,
-			putData,
-			headers
-		});
-
-		return data;
-	}
-
-	async deletePayment(id: number, headers): Promise<ResponseTypeDto> {
-		const { data } = await this.publish.message(Microservice.CHECKOUT, CheckoutPattern.REMOVE_PAYMENTS, { id, headers });
-
-		return data;
-	}
 }

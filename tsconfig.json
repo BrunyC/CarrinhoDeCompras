@@ -57,6 +57,9 @@
       "@lib/type/*": [
         "lib/src/type/*"
       ],
+      "@lib/helper/*": [
+        "lib/src/helper/*"
+      ],
       "@product/*": [
         "microservices/product/src/*"
       ],
