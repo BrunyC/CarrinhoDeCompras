@@ -62,6 +62,7 @@ CREATE TABLE `ProductPrice` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
+    UNIQUE INDEX `ProductPrice_product_id_price_key`(`product_id`, `price`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -77,6 +78,7 @@ CREATE TABLE `Order` (
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
+    UNIQUE INDEX `Order_cart_id_user_id_key`(`cart_id`, `user_id`),
     PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
@@ -101,9 +103,9 @@ CREATE TABLE `OrderItems` (
 CREATE TABLE `Payments` (
     `id` INTEGER NOT NULL AUTO_INCREMENT,
     `order_id` INTEGER NOT NULL,
-    `valor` INTEGER NOT NULL,
+    `value` INTEGER NOT NULL,
     `transaction_id` INTEGER NOT NULL,
-    `status` BOOLEAN NOT NULL,
+    `status` JSON NOT NULL,
     `createdAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
     `updatedAt` DATETIME(3) NOT NULL,
 
