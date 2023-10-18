@@ -1,21 +1,41 @@
-GET http://localhost:8888/product
+GET http://localhost:3000/product
 Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
 
 ###
-POST http://localhost:8888/product
+POST http://localhost:3000/product
 Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
 
-{
-	"title": "Anual",
-	"description": "Plano Anual(360 dias)",
-	"qty": 12,
-	"status": true
-}
+[
+	{
+		"title": "Mensal",
+		"description": "Plano Mensal(30 dias)",
+		"qty": 1,
+		"status": true
+	},
+	{
+		"title": "Trimestral",
+		"description": "Plano Trimestral(90 dias)",
+		"qty": 3,
+		"status": true
+	},
+	{
+		"title": "Semestral",
+		"description": "Plano Semestral(180 dias)",
+		"qty": 6,
+		"status": true
+	},
+	{
+		"title": "Anual",
+		"description": "Plano Anual(360 dias)",
+		"qty": 12,
+		"status": true
+	}
+]
 
 ###
-PUT http://localhost:8888/product/2
+PUT http://localhost:3000/product/2
 Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw
 
@@ -24,6 +44,6 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuY
 }
 
 ###
-DELETE http://localhost:8888/product/4
+DELETE http://localhost:3000/product/4
 Content-Type: application/json
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjE3MTY4LCJuYW1lIjoiR2FicmllbCBLYW5hd2F0aSAtIE1lbGlDb250cm9sICIsImVtYWlsIjoiZ2FicmllbC5yb3NhcmlvQG1lbGljb250cm9sLmNvbS5iciIsImV4cCI6MTY5Mzg5MTQ1MX0.uliHAiQgT4cF2GP_waTz842zWAHxzpfigRz4nijrKiw

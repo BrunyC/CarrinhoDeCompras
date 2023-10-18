@@ -18,7 +18,7 @@
 		"build:ml-cart": "nest build cart",
 		"build:ml-checkout": "nest build checkout",
 		"build:ml-product": "nest build product",
-		"build:ml-product-price": "nest build product-price",
+		"build:ml-product-price": "nest build product_price",
 		"build:ml-user": "nest build user",
 		"build:docker-compose": "docker compose build --no-cache",
 		"build:docker": "docker build --no-cache --force-rm .",
@@ -36,9 +36,14 @@
 		"start": "pm2 start config/ecosystem/ecosystem.microservices.config.js",
 		"start:dev": "pm2 start config/ecosystem/ecosystem.microservices.config.js; pm2 logs",
 		"start:docker:ml-api": "pm2-runtime start config/ecosystem/ecosystem.api.config.js",
-		"start:docker:ml-cart": "pm2-runtime start config/ecosystem/ecosystem.cart.config.js"
+		"start:docker:ml-cart": "pm2-runtime start config/ecosystem/ecosystem.cart.config.js",
+		"start:docker:ml-checkout": "pm2-runtime start config/ecosystem/ecosystem.checkout.config.js",
+		"start:docker:ml-product": "pm2-runtime start config/ecosystem/ecosystem.product.config.js",
+		"start:docker:ml-product-price": "pm2-runtime start config/ecosystem/ecosystem.product-price.config.js",
+		"start:docker:ml-user": "pm2-runtime start config/ecosystem/ecosystem.user.config.js"
 	},
 	"dependencies": {
+		"@nestjs/axios": "^3.0.0",
 		"@nestjs/common": "^9.0.0",
 		"@nestjs/config": "^2.3.2",
 		"@nestjs/core": "^9.0.0",
@@ -50,12 +55,14 @@
 		"@prisma/client": "^5.0.0",
 		"amqp-connection-manager": "^4.1.13",
 		"amqplib": "^0.10.3",
+		"axios": "^1.5.1",
 		"class-transformer": "^0.5.1",
 		"class-validator": "^0.14.0",
 		"helmet": "^7.0.0",
 		"passport": "^0.6.0",
 		"passport-jwt": "^4.0.1",
-		"reflect-metadata": "^0.1.13"
+		"reflect-metadata": "^0.1.13",
+		"webpack": "^5.89.0"
 	},
 	"devDependencies": {
 		"@nestjs/cli": "^9.0.0",

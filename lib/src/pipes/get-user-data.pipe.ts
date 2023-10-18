@@ -15,16 +15,13 @@ export class GetUserPipe implements PipeTransform {
 
 			const userData = await this.authService.getUserFromToken(authToken);
 
-			if (!userData.sub)
-				throw 'Erro ao obter o id do usuário.';
+			if (!userData.sub) throw 'Erro ao obter o id do usuário.';
 
 			return { data: { userData, value } };
 		} catch (error) {
 			Logger.log(`An error occurred to get user id: ${JSON.stringify(error)}`, 'GetUserPipe');
 
-			throw new RpcException(
-				ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, error)
-			);
+			throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, error));
 		}
 	}
 }

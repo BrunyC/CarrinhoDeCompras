@@ -27,7 +27,7 @@ export class ProductPriceController {
 	}
 
 	@MessagePattern(ProductPricePattern.POST_PRODUCT_PRICE)
-	async createdProductPrice(@Payload() data: CreateProductPriceDto, @Ctx() context: RmqContext): Promise<any> {
+	async createdProductPrice(@Payload() data: CreateProductPriceDto[], @Ctx() context: RmqContext): Promise<any> {
 		const channel = context.getChannelRef();
 		const message = context.getMessage();
 
@@ -45,11 +45,11 @@ export class ProductPriceController {
 	}
 
 	@MessagePattern(ProductPricePattern.UPDATE_PRODUCT_PRICE)
-	async updateProductPrice(@Payload() data: { id: number; product: UpdateProductPriceDto }, @Ctx() context: RmqContext): Promise<any> {
+	async updateProductPrice(@Payload() data: { id: number; body: UpdateProductPriceDto }, @Ctx() context: RmqContext): Promise<any> {
 		const channel = context.getChannelRef();
 		const message = context.getMessage();
 		try {
-			const result = await this.productPriceService.updateProductPrice(data.id, data.product);
+			const result = await this.productPriceService.updateProductPrice(data.id, data.body);
 
 			channel.ack(message);
 

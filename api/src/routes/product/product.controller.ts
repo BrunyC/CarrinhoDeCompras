@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseArrayPipe, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
 import { ProductService } from './product.service';
 import {
 	ApiBadRequestResponse,
@@ -12,7 +12,6 @@ import {
 	ApiUnauthorizedResponse
 } from '@nestjs/swagger';
 import { ResponseTypeDto } from '@lib/dto/general/index';
-import { Payload } from '@nestjs/microservices';
 import { CreateProductDto, UpdateProductDto } from '@lib/dto/microservices/product/index';
 
 @ApiTags('Product')
@@ -36,30 +35,30 @@ export class ProductController {
 	}
 
 	@Post()
-	@UsePipes(new ValidationPipe({ transform: true, whitelist: true, forbidUnknownValues: true, forbidNonWhitelisted: true }))
 	@ApiBody({
-		type: CreateProductDto,
-		description: 'The body request is a json.'
+		type: [CreateProductDto],
+		description: 'The body request is a json[].'
 	})
+	@UsePipes(new ParseArrayPipe({ items: CreateProductDto, whitelist: true, forbidUnknownValues: true, forbidNonWhitelisted: true }))
 	@ApiCreatedResponse({ type: ResponseTypeDto, description: 'The product has been successfully created.' })
 	@ApiBadRequestResponse({ type: ResponseTypeDto, description: 'An error occurred. A message explaining will be notified.' })
 	@ApiInternalServerErrorResponse({ type: ResponseTypeDto, description: 'An error occurred. A message explaining will be notified.' })
 	@ApiUnauthorizedResponse({ type: ResponseTypeDto, description: 'Unauthorized' })
-	async createProduct(@Payload() data: CreateProductDto): Promise<ResponseTypeDto> {
+	async createProduct(@Body() data: CreateProductDto[]): Promise<ResponseTypeDto> {
 		return this.productService.createProduct(data);
 	}
 
 	@Put('/:id')
-	@UsePipes(new ValidationPipe({ transform: true, whitelist: true, forbidUnknownValues: true, forbidNonWhitelisted: true }))
 	@ApiBody({
 		type: UpdateProductDto,
 		description: 'The body request is a json.'
 	})
+	@UsePipes(new ValidationPipe({ transform: true, whitelist: true, forbidUnknownValues: true, forbidNonWhitelisted: true }))
 	@ApiCreatedResponse({ type: ResponseTypeDto, description: 'The product has been successfully updated.' })
 	@ApiBadRequestResponse({ type: ResponseTypeDto, description: 'An error occurred. A message explaining will be notified.' })
 	@ApiInternalServerErrorResponse({ type: ResponseTypeDto, description: 'An error occurred. A message explaining will be notified.' })
 	@ApiUnauthorizedResponse({ type: ResponseTypeDto, description: 'Unauthorized' })
-	async updateProduct(@Param('id') id: string, @Payload() data: UpdateProductDto): Promise<any> {
+	async updateProduct(@Param('id') id: string, @Body() data: UpdateProductDto): Promise<any> {
 		return this.productService.updateProduct(data, Number(id));
 	}
 

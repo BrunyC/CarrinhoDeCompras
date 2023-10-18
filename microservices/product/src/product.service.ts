@@ -25,15 +25,15 @@ export class ProductService {
 			});
 	}
 
-	async createdProduct(product: CreateProductDto): Promise<any> {
+	async createdProduct(data: CreateProductDto[]): Promise<any> {
 		return this.prisma.product
-			.create({
-				data: product
+			.createMany({
+				data: data
 			})
 			.then((result) => {
-				Logger.log('Product successfully created', 'CreateProduct');
+				Logger.log('Products successfully created', 'CreateProduct');
 
-				return { data: { statusCode: HttpStatus.CREATED, message: 'Produto criado com sucesso!', data: result } };
+				return { data: { statusCode: HttpStatus.CREATED, message: 'Produtos criados com sucesso!', data: result } };
 			})
 			.catch((error) => {
 				throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, error.meta ? error.meta : error.message));

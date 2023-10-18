@@ -25,15 +25,15 @@ export class ProductPriceService {
 			});
 	}
 
-	async createdProductPrice(product: CreateProductPriceDto): Promise<any> {
+	async createdProductPrice(data: CreateProductPriceDto[]): Promise<any> {
 		return this.prisma.productPrice
-			.create({
-				data: product
+			.createMany({
+				data: data
 			})
 			.then((result) => {
-				Logger.log('Product price successfully created', 'CreateProductPrice');
+				Logger.log('Product prices successfully created', 'CreateProductPrice');
 
-				return { data: { statusCode: HttpStatus.CREATED, message: 'Preço do produto criado com sucesso!', data: result } };
+				return { data: { statusCode: HttpStatus.CREATED, message: 'Preço dos produtos criado com sucesso!', data: result } };
 			})
 			.catch((error) => {
 				throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, error.meta ? error.meta : error.message));
@@ -52,7 +52,6 @@ export class ProductPriceService {
 				return { data: { statusCode: HttpStatus.OK, message: 'Preço do produto atualizado com sucesso!', data: result } };
 			})
 			.catch((error) => {
-				console.log(error.meta);
 				throw new RpcException(ExceptionObjectDto.generate(HttpStatus.BAD_REQUEST, error.meta ? error.meta : error.message));
 			});
 	}

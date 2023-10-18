@@ -1,4 +1,4 @@
-import { Controller, Delete, Get, Param, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseArrayPipe, Post, Put, UsePipes, ValidationPipe } from '@nestjs/common';
 import {
 	ApiBadRequestResponse,
 	ApiBody,
@@ -11,7 +11,6 @@ import {
 	ApiUnauthorizedResponse
 } from '@nestjs/swagger';
 import { ResponseTypeDto } from '@lib/dto/general/index';
-import { Payload } from '@nestjs/microservices';
 import { ProductPriceService } from './product-price.service';
 import { CreateProductPriceDto, UpdateProductPriceDto } from '@lib/dto/microservices/product_price/index';
 
@@ -36,30 +35,30 @@ export class ProductPriceController {
 	}
 
 	@Post()
-	@UsePipes(new ValidationPipe({ transform: true, whitelist: true, forbidUnknownValues: true, forbidNonWhitelisted: true }))
 	@ApiBody({
-		type: CreateProductPriceDto,
+		type: [CreateProductPriceDto],
 		description: 'The body request is a json.'
 	})
+	@UsePipes(new ParseArrayPipe({ items: CreateProductPriceDto, whitelist: true, forbidUnknownValues: true, forbidNonWhitelisted: true }))
 	@ApiCreatedResponse({ type: ResponseTypeDto, description: 'The product price has been successfully created.' })
 	@ApiBadRequestResponse({ type: ResponseTypeDto, description: 'An error occurred. A message explaining will be notified.' })
 	@ApiInternalServerErrorResponse({ type: ResponseTypeDto, description: 'An error occurred. A message explaining will be notified.' })
 	@ApiUnauthorizedResponse({ type: ResponseTypeDto, description: 'Unauthorized' })
-	async createProductPrice(@Payload() data: CreateProductPriceDto): Promise<ResponseTypeDto> {
+	async createProductPrice(@Body() data: CreateProductPriceDto[]): Promise<ResponseTypeDto> {
 		return this.productPriceService.createProductPrice(data);
 	}
 
 	@Put('/:id')
-	@UsePipes(new ValidationPipe({ transform: true, whitelist: true, forbidUnknownValues: true, forbidNonWhitelisted: true }))
 	@ApiBody({
 		type: UpdateProductPriceDto,
 		description: 'The body request is a json.'
 	})
+	@UsePipes(new ValidationPipe({ transform: true, whitelist: true, forbidUnknownValues: true, forbidNonWhitelisted: true }))
 	@ApiCreatedResponse({ type: ResponseTypeDto, description: 'The product price has been successfully updated.' })
 	@ApiBadRequestResponse({ type: ResponseTypeDto, description: 'An error occurred. A message explaining will be notified.' })
 	@ApiInternalServerErrorResponse({ type: ResponseTypeDto, description: 'An error occurred. A message explaining will be notified.' })
 	@ApiUnauthorizedResponse({ type: ResponseTypeDto, description: 'Unauthorized' })
-	async updateProductPrice(@Param('id') id: string, @Payload() data: UpdateProductPriceDto): Promise<any> {
+	async updateProductPrice(@Param('id') id: string, @Body() data: UpdateProductPriceDto): Promise<any> {
 		return this.productPriceService.updateProductPrice(data, Number(id));
 	}
 

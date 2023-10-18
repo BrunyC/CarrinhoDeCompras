@@ -22,16 +22,16 @@ export class ProductService {
 		return data;
 	}
 
-	async createProduct(product: CreateProductDto): Promise<any> {
-		const { data } = await this.publish.message(Microservice.PRODUCT, ProductPattern.POST_PRODUCT, product);
+	async createProduct(body: CreateProductDto[]): Promise<any> {
+		const { data } = await this.publish.message(Microservice.PRODUCT, ProductPattern.POST_PRODUCT, body);
 
 		return data;
 	}
 
-	async updateProduct(product: UpdateProductDto, id: number): Promise<any> {
+	async updateProduct(body: UpdateProductDto, id: number): Promise<any> {
 		const { data } = await this.publish.message(Microservice.PRODUCT, ProductPattern.UPDATE_PRODUCT, {
 			id,
-			product
+			body
 		});
 
 		return data;
