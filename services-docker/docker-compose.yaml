@@ -3,17 +3,17 @@ version: '3.7'
 networks:
   internal:
     external: true
-  meli-network:
+  cart-network:
     driver: bridge
 
 services:
   mysql:
-    container_name: melicontrol-mysql-8.0
+    container_name: cart-mysql-8.0
     image: mysql:8.0
     cap_add:
       - SYS_NICE
     environment:
-      - MYSQL_DATABASE=melicontrol
+      - MYSQL_DATABASE=cart
       - MYSQL_ROOT_PASSWORD=main
     ports:
       - '3306:3306'
@@ -21,11 +21,11 @@ services:
       - ./services/mysql/data:/var/lib/mysql
       - ./services/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - meli-network
+      - cart-network
       - internal
-  
+
   rabbitmq:
-    container_name: melicontrol-rabbitmq-3.8.3
+    container_name: cart-rabbitmq-3.8.3
     image: rabbitmq:3.8-management
     volumes:
       - ./services/rabbitmq/data:/var/lib/rabbitmq/
@@ -36,5 +36,5 @@ services:
       - '5672:5672'
       - '15672:15672'
     networks:
-      - meli-network
+      - cart-network
       - internal

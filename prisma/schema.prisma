@@ -12,17 +12,17 @@ model User {
   id           Int     @id @default(autoincrement())
   name         String
   email        String  @unique
-  user_meli_id Int     @unique
+  user_id      Int     @unique
   status       Boolean
   cart         Cart[]
   order        Order[]
 
-  @@unique([email, user_meli_id])
+  @@unique([email, user_id])
 }
 
 model Cart {
   id          Int          @id @default(autoincrement())
-  user        User         @relation(fields: [user_id], references: [user_meli_id], onDelete: Cascade)
+  user        User         @relation(fields: [user_id], references: [user_id], onDelete: Cascade)
   user_id     Int
   title       String?
   status      Boolean      @default(true)
@@ -81,7 +81,7 @@ model Order {
   cart           Cart     @relation(fields: [cart_id], references: [id])
   cart_id        Int
   cart_data      Json
-  user           User     @relation(fields: [user_id], references: [user_meli_id])
+  user           User     @relation(fields: [user_id], references: [user_id])
   user_id        Int
   user_data      Json
   status         Json

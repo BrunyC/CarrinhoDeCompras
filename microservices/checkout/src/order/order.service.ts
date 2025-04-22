@@ -42,7 +42,7 @@ export class OrderService {
 			);
 		}
 
-		const userData = await this.userService.getOnlyUser({ user_meli_id: user.sub });
+		const userData = await this.userService.getOnlyUser({ user_id: user.sub });
 
 		return this.prisma.order
 			.create({

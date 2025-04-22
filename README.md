@@ -1,5 +1,5 @@
-# MeliControlMicroServices
-MeliControl MicroServices
+# ShoppCartMicroServices
+Cart MicroServices
 
 ## Installation
 
@@ -122,21 +122,21 @@ npm run lint:format
 
 ## Docker
 
-## To build meli-api docker image
+## To build api docker image
 
 ```bash
-docker compose build meli-api
+docker compose build api
 ```
 
 ## To build cart docker image
 
 ```bash
-docker compose build meli-cart
+docker compose build cart
 ```
 ## To build and execute cart docker image
 
 ```bash
-docker compose up -d meli-cart --build
+docker compose up -d cart --build
 ```
 
 ## Docs

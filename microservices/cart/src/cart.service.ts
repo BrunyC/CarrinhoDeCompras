@@ -97,11 +97,11 @@ export class CartService {
 	}
 
 	async checkUserToCreateCart(cart: CreateCartDto, user: any) {
-		const resultUser = await this.userService.getOnlyUser({ user_meli_id: user.sub });
+		const resultUser = await this.userService.getOnlyUser({ user_id: user.sub });
 
 		if (!resultUser) {
 			return this.userService
-				.createdUser({ name: user.name, email: user.email, user_meli_id: user.sub, status: true })
+				.createdUser({ name: user.name, email: user.email, user_id: user.sub, status: true })
 				.then(() => {
 					return this.createdCart(cart, user);
 				})

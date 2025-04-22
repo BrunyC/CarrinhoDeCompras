@@ -13,7 +13,7 @@ async function bootstrap() {
 	app.use(helmet());
 
 	const swaggerApiOptions = new DocumentBuilder()
-		.setTitle('MeliControl Microservices')
+		.setTitle('Cart Microservices')
 		.setDescription(description)
 		.setVersion(version)
 		.build();

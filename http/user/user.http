@@ -11,7 +11,7 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJwYXlsb2FkIjp7Im5hb
 	"name": "Bruno",
 	"lastname": "Teste",
 	"cpf": "41781166811",
-	"user_meli_id": 2,
+	"user_id": 2,
 	"status": true
 }
 

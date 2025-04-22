@@ -5,144 +5,144 @@ networks:
         external: true
 
 services:
-    meli-api:
-        container_name: meli-api
+    api:
+        container_name: api
         build:
             context: .
-            dockerfile: ./melicontrol-microservices-docker/meli-api.Dockerfile
+            dockerfile: ./microservices-docker/api.Dockerfile
         environment:
             PORT: 3000
-            RMQ_HOST: melicontrol-rabbitmq-3.8.3
+            RMQ_HOST: cart-rabbitmq-3.8.3
             RMQ_USERNAME: guest
             RMQ_PASSWORD: guest
             RMQ_PORT: 5672
             RMQ_VHOST: ''
             RMQ_QUEUE_DURABLE_CONFIG: 'true'
-            DATABASE_URL: 'mysql://root:main@melicontrol-mysql-8.0:3306/melicontrol'
+            DATABASE_URL: 'mysql://root:main@cart-mysql-8.0:3306/cart'
             JWT_TOKEN_EXPIRATION_TIME: 3600
-            MELI_JWT_SECRET_PHRASE: a34fe21f235ecb49a05d25eb9b612cc3f57911eda8ddd11f9d09856a26dcb07f
+            CART_JWT_SECRET_PHRASE: a34fe21f235ecb49a05d25eb9b612cc3f57911eda8ddd11f9d09856a26dcb07f
         ports:
             - 3000:3000
         networks:
             - internal
 
-    meli-cart:
-        container_name: meli-cart
+    cart:
+        container_name: cart
         build:
             context: .
-            dockerfile: ./melicontrol-microservices-docker/meli-cart.Dockerfile
+            dockerfile: ./microservices-docker/cart.Dockerfile
         environment:
-            RMQ_HOST: melicontrol-rabbitmq-3.8.3
+            RMQ_HOST: cart-rabbitmq-3.8.3
             RMQ_USERNAME: guest
             RMQ_PASSWORD: guest
             RMQ_PORT: 5672
             RMQ_VHOST: ''
             RMQ_QUEUE_DURABLE_CONFIG: 'true'
-            DB_HOST: melicontrol-mysql-8.0
+            DB_HOST: cart-mysql-8.0
             DB_PORT: 3306
             DB_USER: root
             DB_PASSWORD: main
-            DB_NAME: melicontrol
-            DATABASE_URL: 'mysql://root:main@melicontrol-mysql-8.0:3306/melicontrol'
+            DB_NAME: cart
+            DATABASE_URL: 'mysql://root:main@cart-mysql-8.0:3306/cart'
             JWT_TOKEN_EXPIRATION_TIME: 3600
-            MELI_JWT_SECRET_PHRASE: a34fe21f235ecb49a05d25eb9b612cc3f57911eda8ddd11f9d09856a26dcb07f
+            CART_JWT_SECRET_PHRASE: a34fe21f235ecb49a05d25eb9b612cc3f57911eda8ddd11f9d09856a26dcb07f
         networks:
             - internal
 
-    meli-checkout:
-        container_name: meli-checkout
+    checkout:
+        container_name: checkout
         build:
             context: .
-            dockerfile: ./melicontrol-microservices-docker/meli-checkout.Dockerfile
+            dockerfile: ./microservices-docker/checkout.Dockerfile
         environment:
-            RMQ_HOST: melicontrol-rabbitmq-3.8.3
+            RMQ_HOST: cart-rabbitmq-3.8.3
             RMQ_USERNAME: guest
             RMQ_PASSWORD: guest
             RMQ_PORT: 5672
             RMQ_VHOST: ''
             RMQ_QUEUE_DURABLE_CONFIG: 'true'
-            DB_HOST: melicontrol-mysql-8.0
+            DB_HOST: cart-mysql-8.0
             DB_PORT: 3306
             DB_USER: root
             DB_PASSWORD: main
-            DB_NAME: melicontrol
-            DATABASE_URL: 'mysql://root:main@melicontrol-mysql-8.0:3306/melicontrol'
+            DB_NAME: cart
+            DATABASE_URL: 'mysql://root:main@cart-mysql-8.0:3306/cart'
             JWT_TOKEN_EXPIRATION_TIME: 3600
-            MELI_JWT_SECRET_PHRASE: a34fe21f235ecb49a05d25eb9b612cc3f57911eda8ddd11f9d09856a26dcb07f
+            CART_JWT_SECRET_PHRASE: a34fe21f235ecb49a05d25eb9b612cc3f57911eda8ddd11f9d09856a26dcb07f
             # MP_HOST: "https://api.mercadopago.com"
             # MP_ENDPOINT: "/checkout/preferences"
             # MP_ACCESS_TOKEN: ""
-            # SUCCESS_BACK_URL: "https://dev.melicontrol.com.br/MercadoPago/SuccessPayment/Plan"
-            # PENDING_BACK_URL: "https://dev.melicontrol.com.br/MercadoPago/PendingPayment/Plan"
-            # FAILURE_BACK_URL: "https://dev.melicontrol.com.br/MercadoPago/FailurePayment/Plan"
+            # SUCCESS_BACK_URL: ""
+            # PENDING_BACK_URL: ""
+            # FAILURE_BACK_URL: ""
         networks:
             - internal
 
-    meli-product:
-        container_name: meli-product
+    product:
+        container_name: product
         build:
             context: .
-            dockerfile: ./melicontrol-microservices-docker/meli-product.Dockerfile
+            dockerfile: ./microservices-docker/product.Dockerfile
         environment:
-            RMQ_HOST: melicontrol-rabbitmq-3.8.3
+            RMQ_HOST: cart-rabbitmq-3.8.3
             RMQ_USERNAME: guest
             RMQ_PASSWORD: guest
             RMQ_PORT: 5672
             RMQ_VHOST: ''
             RMQ_QUEUE_DURABLE_CONFIG: 'true'
-            DB_HOST: melicontrol-mysql-8.0
+            DB_HOST: cart-mysql-8.0
             DB_PORT: 3306
             DB_USER: root
             DB_PASSWORD: main
-            DB_NAME: melicontrol
-            DATABASE_URL: 'mysql://root:main@melicontrol-mysql-8.0:3306/melicontrol'
+            DB_NAME: cart
+            DATABASE_URL: 'mysql://root:main@cart-mysql-8.0:3306/cart'
             JWT_TOKEN_EXPIRATION_TIME: 3600
-            MELI_JWT_SECRET_PHRASE: a34fe21f235ecb49a05d25eb9b612cc3f57911eda8ddd11f9d09856a26dcb07f
+            CART_JWT_SECRET_PHRASE: a34fe21f235ecb49a05d25eb9b612cc3f57911eda8ddd11f9d09856a26dcb07f
         networks:
             - internal
 
-    meli-product-price:
-        container_name: meli-product-price
+    product-price:
+        container_name: product-price
         build:
             context: .
-            dockerfile: ./melicontrol-microservices-docker/meli-product-price.Dockerfile
+            dockerfile: ./microservices-docker/product-price.Dockerfile
         environment:
-            RMQ_HOST: melicontrol-rabbitmq-3.8.3
+            RMQ_HOST: cart-rabbitmq-3.8.3
             RMQ_USERNAME: guest
             RMQ_PASSWORD: guest
             RMQ_PORT: 5672
             RMQ_VHOST: ''
             RMQ_QUEUE_DURABLE_CONFIG: 'true'
-            DB_HOST: melicontrol-mysql-8.0
+            DB_HOST: cart-mysql-8.0
             DB_PORT: 3306
             DB_USER: root
             DB_PASSWORD: main
-            DB_NAME: melicontrol
-            DATABASE_URL: 'mysql://root:main@melicontrol-mysql-8.0:3306/melicontrol'
+            DB_NAME: cart
+            DATABASE_URL: 'mysql://root:main@cart-mysql-8.0:3306/cart'
             JWT_TOKEN_EXPIRATION_TIME: 3600
-            MELI_JWT_SECRET_PHRASE: a34fe21f235ecb49a05d25eb9b612cc3f57911eda8ddd11f9d09856a26dcb07f
+            CART_JWT_SECRET_PHRASE: a34fe21f235ecb49a05d25eb9b612cc3f57911eda8ddd11f9d09856a26dcb07f
         networks:
             - internal
 
-    meli-user:
-        container_name: meli-user
+    user:
+        container_name: user
         build:
             context: .
-            dockerfile: ./melicontrol-microservices-docker/meli-user.Dockerfile
+            dockerfile: ./microservices-docker/user.Dockerfile
         environment:
-            RMQ_HOST: melicontrol-rabbitmq-3.8.3
+            RMQ_HOST: cart-rabbitmq-3.8.3
             RMQ_USERNAME: guest
             RMQ_PASSWORD: guest
             RMQ_PORT: 5672
             RMQ_VHOST: ''
             RMQ_QUEUE_DURABLE_CONFIG: 'true'
-            DB_HOST: melicontrol-mysql-8.0
+            DB_HOST: cart-mysql-8.0
             DB_PORT: 3306
             DB_USER: root
             DB_PASSWORD: main
-            DB_NAME: melicontrol
-            DATABASE_URL: 'mysql://root:main@melicontrol-mysql-8.0:3306/melicontrol'
+            DB_NAME: cart
+            DATABASE_URL: 'mysql://root:main@cart-mysql-8.0:3306/cart'
             JWT_TOKEN_EXPIRATION_TIME: 3600
-            MELI_JWT_SECRET_PHRASE: a34fe21f235ecb49a05d25eb9b612cc3f57911eda8ddd11f9d09856a26dcb07f
+            CART_JWT_SECRET_PHRASE: a34fe21f235ecb49a05d25eb9b612cc3f57911eda8ddd11f9d09856a26dcb07f
         networks:
             - internal

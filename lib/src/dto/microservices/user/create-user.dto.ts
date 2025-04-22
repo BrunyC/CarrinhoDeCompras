@@ -16,7 +16,7 @@ export class CreateUserDto {
 	@ApiProperty({ type: 'number' })
 	@IsNotEmpty()
 	@IsNumber()
-	user_meli_id: number;
+	user_id: number;
 
 	@ApiProperty({ type: 'boolean' })
 	@IsNotEmpty()

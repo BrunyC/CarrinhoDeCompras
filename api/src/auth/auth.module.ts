@@ -14,7 +14,7 @@ const configService = new ConfigService();
 		ConfigModule.forRoot(),
 		PassportModule.register({ defaultStrategy: 'jwt' }),
 		JwtModule.register({
-			secret: configService.get<string>('MELI_JWT_SECRET_PHRASE'),
+			secret: configService.get<string>('CART_JWT_SECRET_PHRASE'),
 			signOptions: {
 				expiresIn: Number(configService.get('JWT_TOKEN_EXPIRATION_TIME'))
 			}
